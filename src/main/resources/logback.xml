@@ -1,15 +1,26 @@
 <configuration scan="false">
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <appender name="JRT" class="ch.qos.logback.core.FileAppender">
         <file>jrt.log</file>
 
         <encoder>
-            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+            <!--<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
+            <pattern>%level %logger{10} %msg%n</pattern>
         </encoder>
     </appender>
 
+    <appender name="SPRING" class="ch.qos.logback.core.FileAppender">
+        <file>jrt-spring.log</file>
 
-    <root level="debug">
-        <appender-ref ref="FILE" />
-    </root>
+        <encoder>
+            <!--<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
+            <pattern>%level %logger{10} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework">
+        <appender-ref ref="SPRING" />
+    </logger>
+
+
 </configuration>

@@ -1,11 +1,10 @@
 package com.buschmais.jqassistant.release.cli;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.shell.Bootstrap;
 
 import java.io.IOException;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class ReleaseToolMain {
     public static void main(String[] args) {
 
