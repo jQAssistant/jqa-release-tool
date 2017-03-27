@@ -1,0 +1,14 @@
+# jQAssistant Release Tool
+
+In progress.
+
+## How to run the Release Tool
+
+To run the release tool execute the following command
+
+[source]
+----
+> cd jqa-release-tools
+> mvn clean package org.codehaus.mojo:appassembler-maven-plugin:assemble
+> sh target/appassembler/bin/jqa-release-tool
+----
