@@ -31,6 +31,7 @@
         <logback.version>1.2.2</logback.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-enforcer-plugin.version>3.0.0-M1</maven-enforcer-plugin.version>
+        <jgit.version>4.11.0.201803080745-r</jgit.version>
     </properties>
 
 
@@ -96,9 +97,35 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>3.5.3</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.21</version>
+        </dependency>
 
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.junit</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+
+        <dependency>
+            <groupId>org.xmlbeam</groupId>
+            <artifactId>xmlprojector</artifactId>
+            <version>1.4.14</version>
+        </dependency>
     </dependencies>
 
 

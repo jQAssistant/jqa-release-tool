@@ -1,0 +1,12 @@
+projects:
+  - name: Parent Project
+    id: pp
+    repository: git@github.com:buschmais/jqa-junit-plugin.git
+    groupId: project
+    artifactId: parent
+    version: 14
+  - name: ChildProject
+    id: cp
+    repository: git@github.com:buschmais/jqa-uber-parent.git
+    groupId: project
+    artifactId: child
