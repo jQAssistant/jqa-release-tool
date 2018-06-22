@@ -48,7 +48,7 @@ public class CheckoutCommand implements CommandLineRunner {
 
             Git.cloneRepository()
                .setURI(projectRepository.getRepositoryURL())
-               .setDirectory(new File("/tmp/" + u.getHumanishName()))
+          //     .setDirectory(new File("/tmp/" + u.getHumanishName()))
                .call();
         }
     }
