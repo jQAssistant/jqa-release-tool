@@ -28,6 +28,9 @@
 
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <assertj.version>3.9.1</assertj.version>
         <asm.version>6.1.1</asm.version>
         <logback.version>1.2.2</logback.version>
@@ -59,6 +62,21 @@
                             <version>${junit5.version}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                        <executable>true</executable>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -128,6 +146,17 @@
                 <version>${javax-annotation-api.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit</artifactId>
+                <version>${jgit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jgit</groupId>
+                <artifactId>org.eclipse.jgit.junit</artifactId>
+                <version>${jgit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit5.version}</version>
@@ -164,17 +193,6 @@
             <version>1.21</version>
         </dependency>
 
-            <dependency>
-                <groupId>org.eclipse.jgit</groupId>
-                <artifactId>org.eclipse.jgit</artifactId>
-                <version>${jgit.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.eclipse.jgit</groupId>
-                <artifactId>org.eclipse.jgit.junit</artifactId>
-                <version>${jgit.version}</version>
-            </dependency>
 
         <dependency>
             <groupId>org.xmlbeam</groupId>

@@ -13,6 +13,14 @@
     <artifactId>checkout</artifactId>
     <name>jQAssistant RT Checkout Command</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -21,8 +29,17 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.buschmais.jqassistant.release</groupId>
+            <artifactId>projects</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
         </dependency>
     </dependencies>
 

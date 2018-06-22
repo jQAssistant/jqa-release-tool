@@ -120,7 +120,7 @@ scmurl: git@github.com:jqara/jqa-graphml-plugin.git
 ---
 order: 240
 name: jQA JPA 2 Plugin
-scmurl: git@github.com:jqara/jqa-spring-plugin.git
+scmurl: git@github.com:jqara/jqa-jpa2-plugin.git
 
 ---
 order: 250
