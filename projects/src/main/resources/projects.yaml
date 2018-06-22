@@ -2,3 +2,148 @@
 order: 0
 name: jQA Ueber Parent
 scmurl: git@github.com:jqara/jqa-uber-parent.git
+---
+order: 10
+name: jQAssistant Own Rules
+scmurl: git@github.com:jqara/jqa-own-constraints.git
+
+---
+order: 20
+name: jQA Asciidoctor Utilities
+scmurl: git@github.com:jqara/jqa-asciidoctor-utilities.git
+
+---
+order: 30
+name: jQA Checkstyle Config
+scmurl: git@github.com:jqara/jqa-checkstyle-config.git
+
+---
+order: 40
+name: jQA Neo4j Server
+scmurl: git@github.com:jqara/jqa-neo4j-backend.git
+
+---
+order: 50
+name: jQA Core Framework
+scmurl: git@github.com:jqara/jqa-core-framework.git
+
+---
+order: 60
+name: jQA Plugin Parent
+scmurl: git@github.com:buschmais/jqa-plugin-parent.git
+
+---
+order: 70
+name: jQA Plugin Common
+scmurl: git@github.com:buschmais/jqa-plugin-common.git
+
+---
+order: 80
+name: jQA XML Plugin
+scmurl: git@github.com:jqara/jqa-xml-plugin.git
+
+---
+order: 90
+name: jQA Java Plugin
+scmurl: git@github.com:jqara/jqa-java-plugin.git
+
+---
+order: 100
+name: jQA Java 8 Plugin
+scmurl: git@github.com:jqara/jqa-java8-plugin.git
+
+---
+order: 110
+name: jQA JSON Plugin
+scmurl: git@github.com:jqara/jqa-json-plugin.git
+
+---
+order: 120
+name: jQA YAML Plugin
+scmurl: git@github.com:jqara/jqa-yaml-plugin.git
+
+---
+order: 130
+name: jQA JUnit Plugin
+scmurl: git@github.com:jqara/jqa-junit-plugin.git
+
+---
+order: 140
+name: jQA RDBMS Plugin
+scmurl: git@github.com:jqara/jqa-rdbms-plugin.git
+
+---
+order: 150
+name: jQA Maven 3 Plugin
+scmurl: git@github.com:jqara/jqa-maven3-plugin.git
+
+---
+order: 160
+name: jQA Tycho Plugin
+scmurl: git@github.com:jqara/jqa-tycho-plugin.git
+
+---
+order: 170
+name: jQA JAX RS Plugin
+scmurl: git@github.com:jqara/jqa-jaxrs-plugin.git
+
+---
+order: 180
+name: jQA CDI Plugin
+scmurl: git@github.com:jqara/jqa-cdi-plugin.git
+
+---
+order: 190
+name: jQA TestNG Plugin
+scmurl: git@github.com:jqara/jqa-testng-plugin.git
+
+---
+order: 200
+name: jQA OSGi Plugin
+scmurl: git@github.com:jqara/jqa-osgi-plugin.git
+
+---
+order: 210
+name: jQA EJB Plugin
+scmurl: git@github.com:jqara/jqa-ejb3-plugin.git
+
+---
+order: 220
+name: jQA M2Repo Plugin
+scmurl: git@github.com:jqara/jqa-m2repo-plugin.git
+
+---
+order: 230
+name: jQA GraphML Plugin
+scmurl: git@github.com:jqara/jqa-graphml-plugin.git
+
+---
+order: 240
+name: jQA JPA 2 Plugin
+scmurl: git@github.com:jqara/jqa-spring-plugin.git
+
+---
+order: 250
+name: jQA Spring Plugin
+scmurl: git@github.com:jqara/jqa-spring-plugin.git
+
+---
+order: 260
+name: jQA Java EE 6 Plugin
+scmurl: git@github.com:jqara/jqa-javaee6-plugin.git
+
+---
+order: 270
+name: jQA Distribution Spezification
+scmurl: git@github.com:jqara/jqa-distribution-specification.git
+
+---
+order: 280
+name: jQA Maven Plugin
+scmurl: git@github.com:jqara/jqa-maven-plugin.git
+
+---
+order: 290
+name: jQA Manual
+scmurl: git@github.com:jqara/jqa-manual.git
+
