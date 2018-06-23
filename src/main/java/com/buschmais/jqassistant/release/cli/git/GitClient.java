@@ -1,22 +1,7 @@
 package com.buschmais.jqassistant.release.cli.git;
 
-import com.buschmais.jqassistant.release.cli.command.ListCommand;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xmlbeam.XBProjector;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.text.Format;
 
 public class GitClient {
 
@@ -28,13 +13,9 @@ public class GitClient {
 
         return this;
     }
-
+/*
     public void clone(ListCommand.jQAProject project) throws Exception {
 
-        File t = new File(workingDir.toString() + "/" + project.id);
-        System.out.println("Target für " + project.name +
-        " ist " + t.toString());
-/*
         Git.cloneRepository()
            .setURI(project.repository)
            .setDirectory(
@@ -43,7 +24,7 @@ public class GitClient {
 
            )
            .call();
-*/
+
 
         FileInputStream fis = new FileInputStream("/Users/plexus/pom.xml");
         MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -77,6 +58,13 @@ public class GitClient {
         StreamResult result = new StreamResult(System.out);
         transformer.transform(source, result);
 
+        System.out.println("Target für " + project.name +
+        " ist " + t.toString());
+        File t = new File(workingDir.toString() + "/" + project.id);
+
 
     }
+
+    */
 }
+

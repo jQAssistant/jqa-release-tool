@@ -40,6 +40,11 @@
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.release</groupId>
+            <artifactId>clean</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.buschmais.jqassistant.release</groupId>
             <artifactId>showconfig</artifactId>
             <version>${project.version}</version>
         </dependency>

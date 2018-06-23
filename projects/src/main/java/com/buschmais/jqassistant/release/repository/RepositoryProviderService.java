@@ -39,8 +39,6 @@ public class RepositoryProviderService {
                                                       })
                                                       .collect(Collectors.toCollection(setSupplier));
 
-            set.forEach(System.out::println);
-
             setProjectRepository(set);
         } catch (IOException ioe) {
 

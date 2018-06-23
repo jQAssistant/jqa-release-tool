@@ -135,6 +135,7 @@
     </build>
 
     <modules>
+        <module>clean</module>
         <module>core</module>
         <module>projects</module>
         <module>checkout</module>

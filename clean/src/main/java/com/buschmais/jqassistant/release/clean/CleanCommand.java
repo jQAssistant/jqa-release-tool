@@ -1,11 +1,7 @@
-package com.buschmais.jqassistant.release.checkout;
+package com.buschmais.jqassistant.release.clean;
 
 import com.buschmais.jqassistant.release.core.ProjectRepository;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
-import org.eclipse.jgit.api.CloneCommand;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.lib.AnyObjectId;
-import org.eclipse.jgit.transport.URIish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
@@ -14,13 +10,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.UUID;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Comparator;
 
-@SpringBootApplication(scanBasePackages = "com.buschmais.jqassistant.release")
-public class CheckoutCommand implements CommandLineRunner {
+@SpringBootApplication(scanBasePackages = {
+    "com.buschmais.jqassistant.release.core",
+    "com.buschmais.jqassistant.release.repository"
+})
+public class CleanCommand implements CommandLineRunner {
 
-    RepositoryProviderService repositorySrv;
+    private RepositoryProviderService repositorySrv;
 
     public RepositoryProviderService getRepositorySrv() {
         return repositorySrv;
@@ -32,7 +32,7 @@ public class CheckoutCommand implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(CheckoutCommand.class);
+        SpringApplication app = new SpringApplication(CleanCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
         ConfigurableApplicationContext run = app.run(args);
         int exitCode = SpringApplication.exit(run);
@@ -42,18 +42,20 @@ public class CheckoutCommand implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (ProjectRepository projectRepository : getRepositorySrv().getProjectRepositories()) {
-            URIish u = new URIish(projectRepository.getRepositoryURL());
-            System.out.println(projectRepository.getHumanName());
+        System.out.println("DELETING");
+        for (ProjectRepository p : getRepositorySrv().getProjectRepositories()) {
+            String humanName = p.getHumanName();
+            File f = new File(humanName);
 
-            Git.cloneRepository()
-               .setURI(projectRepository.getRepositoryURL())
-               .setRemote("gh")
-               .setDirectory(new File(projectRepository.getHumanName()))
-               .call()
-            ;
+            System.out.println("D: " + f);
+
+            if (f.exists()) {
+                Files.walk(f.toPath())
+                     .sorted(Comparator.reverseOrder())
+                     .map(Path::toFile)
+                     .forEach(File::delete);
+            }
+
         }
     }
-
-
 }
