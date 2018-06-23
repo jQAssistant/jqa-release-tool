@@ -44,12 +44,14 @@ public class CheckoutCommand implements CommandLineRunner {
     public void run(String... args) throws Exception {
         for (ProjectRepository projectRepository : getRepositorySrv().getProjectRepositories()) {
             URIish u = new URIish(projectRepository.getRepositoryURL());
-            System.out.println(u.getHumanishName());
+            System.out.println(projectRepository.getHumanName());
 
             Git.cloneRepository()
                .setURI(projectRepository.getRepositoryURL())
-          //     .setDirectory(new File("/tmp/" + u.getHumanishName()))
-               .call();
+               .setRemote("gh")
+               .setDirectory(new File("/tmp/"+projectRepository.getHumanName()))
+               .call()
+            ;
         }
     }
 

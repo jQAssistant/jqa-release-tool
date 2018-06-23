@@ -42,6 +42,7 @@
         <junit5.version>5.2.0</junit5.version>
         <snakeyaml.version>1.21</snakeyaml.version>
         <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
+        <maven.version>3.5.3</maven.version>
     </properties>
 
 
@@ -137,11 +138,23 @@
         <module>core</module>
         <module>projects</module>
         <module>checkout</module>
+        <module>writeconfig</module>
+        <module>showconfig</module>
         <module>install</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-artifact</artifactId>
+                <version>${maven.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-model</artifactId>
+                <version>${maven.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
@@ -194,11 +207,6 @@
             <version>${logback.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-model</artifactId>
-            <version>3.5.3</version>
-        </dependency>
 
 
 

@@ -10,27 +10,29 @@
         <version>1.3.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>core</artifactId>
-    <name>jQAssistant Release Tools Parent</name>
+    <artifactId>showconfig</artifactId>
+    <name>jQAssistant RT Config Show</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.maven.release</groupId>
-            <artifactId>maven-release-manager</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-        <!--dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-artifact</artifactId>
-        </dependency-->
-        <dependency>
-            <groupId>org.eclipse.jgit</groupId>
-            <artifactId>org.eclipse.jgit</artifactId>
+            <groupId>com.buschmais.jqassistant.release</groupId>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

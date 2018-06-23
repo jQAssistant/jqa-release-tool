@@ -1,5 +1,8 @@
 package com.buschmais.jqassistant.release.core;
 
+import org.eclipse.jgit.transport.URIish;
+
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class ProjectRepository {
@@ -49,5 +52,15 @@ public class ProjectRepository {
     @Override
     public int hashCode() {
         return Objects.hash(buildOrder, name, repositoryURL);
+    }
+
+    public String getHumanName() {
+        try {
+            return new URIish(getRepositoryURL()).getHumanishName();
+        } catch (URISyntaxException e) {
+            // todo
+        }
+
+        return null;
     }
 }
