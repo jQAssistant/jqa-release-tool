@@ -143,6 +143,11 @@ name: jQA Maven Plugin
 scmurl: git@github.com:jqara/jqa-maven-plugin.git
 
 ---
+order: 285
+name: jQA Commandline Tool
+scmurl: git@github.com:jqara/jqa-commandline-tool.git
+
+---
 order: 290
 name: jQA Manual
 scmurl: git@github.com:jqara/jqa-manual.git
