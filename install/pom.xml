@@ -26,6 +26,9 @@
                         <configuration>
                             <outputDirectory>${user.home}/jqa-rel-tools</outputDirectory>
                             <stripVersion>true</stripVersion>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <overWriteReleases>true</overWriteReleases>
                         </configuration>
                     </execution>
                 </executions>
@@ -46,6 +49,11 @@
         <dependency>
             <groupId>com.buschmais.jqassistant.release</groupId>
             <artifactId>showconfig</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
+            <artifactId>simplebuild</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

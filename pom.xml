@@ -141,7 +141,9 @@
         <module>checkout</module>
         <module>writeconfig</module>
         <module>showconfig</module>
+        <module>commands</module>
         <module>install</module>
+        <module>services</module>
     </modules>
 
     <dependencyManagement>
