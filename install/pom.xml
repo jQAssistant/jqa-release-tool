@@ -47,6 +47,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
+            <artifactId>fullbuild</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.buschmais.jqassistant.release</groupId>
             <artifactId>showconfig</artifactId>
             <version>${project.version}</version>
