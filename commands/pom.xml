@@ -16,6 +16,7 @@
 
     <modules>
         <module>fullbuild</module>
+        <module>jqausages</module>
         <module>simplebuild</module>
         <module>showcurrentversions</module>
     </modules>
