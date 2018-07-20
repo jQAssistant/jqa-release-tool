@@ -19,6 +19,7 @@
         <module>jqausages</module>
         <module>simplebuild</module>
         <module>showcurrentversions</module>
+        <module>updatetorelease</module>
     </modules>
 
 
