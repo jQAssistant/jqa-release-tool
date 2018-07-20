@@ -78,8 +78,7 @@ public class WriteConfigCommand implements CommandLineRunner {
         Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
 
         for (ProjectRepository p : projects) {
-            p.getHumanName();
-            var path = "/tmp/" + p.getHumanName() + "/pom.xml";
+            var path = p.getHumanName() + "/pom.xml";
 
             System.out.println(path);
             FileInputStream fis = new FileInputStream(path);
