@@ -88,7 +88,9 @@ public class WriteConfigCommand implements CommandLineRunner {
 
             ProjectVersion dav = new ProjectVersion(model.getVersion());
 
+            var id = model.getGroupId() + ":" + model.getArtifactId();
             var c = new ReleaseConfig();
+            c.id = id;
             c.name = model.getName();
             c.currentVersion = dav.toString();
             c.releaseVersion = dav.getReleaseVersionString();
