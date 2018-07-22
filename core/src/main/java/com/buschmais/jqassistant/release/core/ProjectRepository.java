@@ -9,6 +9,15 @@ public class ProjectRepository {
     private int buildOrder;
     private String name;
     private String repositoryURL;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getBuildOrder() {
         return buildOrder;
@@ -46,6 +55,7 @@ public class ProjectRepository {
         ProjectRepository that = (ProjectRepository) o;
         return buildOrder == that.buildOrder &&
             Objects.equals(name, that.name) &&
+            Objects.equals(id, that.id) &&
             Objects.equals(repositoryURL, that.repositoryURL);
     }
 
@@ -58,9 +68,7 @@ public class ProjectRepository {
         try {
             return new URIish(getRepositoryURL()).getHumanishName();
         } catch (URISyntaxException e) {
-            // todo
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 }

@@ -55,4 +55,8 @@ public class RepositoryProviderService {
         projectRepositories = set;
     }
 
+    public Optional<ProjectRepository> findById(String id) {
+        return projectRepositories.stream().filter(p -> p.getId().equals(id)).findFirst();
+    }
+
 }

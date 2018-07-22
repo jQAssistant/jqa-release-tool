@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-coreframework">
+        <property name="id" value="com.buschmais.jqassistant.core:parent"/>
+        <property name="groupId" value="com.buschmais.jqassistant.core"/>
+        <property name="artifactId" value="parent"/>
+    </bean>
+
+
+</beans>
