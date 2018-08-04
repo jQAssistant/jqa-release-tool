@@ -7,19 +7,22 @@
   <xsl:param name="group_id" />
   <xsl:param name="artifact_id" />
 
-  <xsl:template match="mvn:version[parent::mvn:project and
+
+  <xsl:template match="mvn:version[parent::mvn:parent and
                        ../mvn:groupId/text() = $group_id and
                        ../mvn:artifactId/text() = $artifact_id]">
     <xsl:copy>
       <xsl:copy-of select="$version_information" />
     </xsl:copy>
+    <!--xsl:message terminate="no">Juhu, gefunden!</xsl:message-->
   </xsl:template>
-
 
   <xsl:template match="@*|node()|comment()">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()"/>
     </xsl:copy>
+
+
   </xsl:template>
 
 </xsl:stylesheet>

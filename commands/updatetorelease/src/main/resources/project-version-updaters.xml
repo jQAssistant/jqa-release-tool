@@ -4,11 +4,222 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-asciidoctor-utilities">
+        <property name="id" value="com.buschmais.jqassistant:asciidoctor-utilities"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="asciidoctor-utilities"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
           id="pro-updater-coreframework">
         <property name="id" value="com.buschmais.jqassistant.core:parent"/>
         <property name="groupId" value="com.buschmais.jqassistant.core"/>
         <property name="artifactId" value="parent"/>
     </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-checkstyle">
+        <property name="id" value="com.buschmais.jqassistant:checkstyle-config"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="checkstyle-config"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-graphml-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:graphml"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="graphml"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-own-constraints">
+        <property name="id" value="com.buschmais.jqassistant:own-constraints"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="own-constraints"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-plugin-parent">
+        <property name="id" value="com.buschmais.jqassistant:jqassistant.plugin.plugin-parent"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="jqassistant.plugin.plugin-parent"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-maven-plugin">
+        <property name="id" value="com.buschmais.jqassistant:jqassistant-maven-plugin"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="jqassistant-maven-plugin"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-spring-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:spring"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="spring"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-uber-parent">
+        <property name="id" value="com.buschmais.jqassistant:jqa-uber-parent"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="jqa-uber-parent"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-distribution">
+        <property name="id" value="com.buschmais.jqassistant:jqa-distribution-specification"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="jqa-distribution-specification"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-plugin-common">
+        <property name="id" value="com.buschmais.jqassistant.plugin:common"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="common"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-neo4jserver">
+        <property name="id" value="com.buschmais.jqassistant.neo4jserver:parent"/>
+        <property name="groupId" value="com.buschmais.jqassistant.neo4jserver"/>
+        <property name="artifactId" value="parent"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-commandclient">
+        <property name="id" value="com.buschmais.jqassistant.cli:parent"/>
+        <property name="groupId" value="com.buschmais.jqassistant.cli"/>
+        <property name="artifactId" value="parent"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-manual">
+        <property name="id" value="com.buschmais.jqassistant:manual"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="manual"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-xml-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:xml"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="xml"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-ejb3-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:ejb3"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="ejb3"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-java-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:java"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="java"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-java8-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:java8"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="java8"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-javaee6-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:javaee6"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="javaee6"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-jaxrs-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:jaxrs"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="jaxrs"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-jpa2-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:jpa2"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="jpa2"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-cdi-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:cdi"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="cdi"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-json-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:json"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="json"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-junit-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:junit"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="junit"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-m2repo-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:m2repo"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="m2repo"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-maven3-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:maven3"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="maven3"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-osgi-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:osgi"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="osgi"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-testng-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:testng"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="testng"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-tycho-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:tycho"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="tycho"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-yaml-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:yaml"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="yaml"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateProjectVersion"
+          id="pro-updater-rdbms-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:rdbms"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="rdbms"/>
+    </bean>
+
 
 
 </beans>
