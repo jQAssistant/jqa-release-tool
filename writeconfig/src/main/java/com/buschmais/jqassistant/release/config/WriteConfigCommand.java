@@ -99,11 +99,11 @@ public class WriteConfigCommand implements CommandLineRunner {
         for (ProjectRepository p : projects) {
             var path = p.getHumanName() + "/pom.xml";
 
-            System.out.println(path);
+            //System.out.println(path);
             FileInputStream fis = new FileInputStream(path);
             MavenXpp3Reader reader = new MavenXpp3Reader();
             Model model = reader.read(fis);
-            System.out.println(model.getVersion());
+            //System.out.println(model.getVersion());
 
             ProjectVersion dav = new ProjectVersion(model.getVersion());
 
@@ -115,7 +115,7 @@ public class WriteConfigCommand implements CommandLineRunner {
             c.releaseVersion = dav.getReleaseVersionString();
             c.nextVersion = dav.getNextVersion().toString();
 
-            System.out.println(model.getName());
+            //System.out.println(model.getName());
             ((LinkedList<ReleaseConfig>) rc).addLast(c);
         }
 
@@ -125,8 +125,11 @@ public class WriteConfigCommand implements CommandLineRunner {
 
         makeLocalCopyOfMavenSettings();
 
+        System.out.println("Wrote maven-settings.xml for Maven.");
+        System.out.println("Please provide your credentials for the deployment to OSS Sonatype.");
+        System.out.println();
         System.out.println("Wrote " + config.getAbsolutePath());
-        System.out.println("You can edit now the file if you want.");
+        System.out.println("You can edit now the configuration file if you want.");
         System.out.println("Use showconfig to display the effective configuration.");
     }
 }
