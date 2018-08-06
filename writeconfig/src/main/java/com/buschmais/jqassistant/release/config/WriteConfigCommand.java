@@ -21,9 +21,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -54,6 +52,27 @@ public class WriteConfigCommand implements CommandLineRunner {
 
         System.exit(exitCode);
     }
+
+    public File makeLocalCopyOfMavenSettings() {
+        // TODO: 23.06.18 class path resource verwenden
+        InputStream is = WriteConfigCommand.class.getResourceAsStream("/settings.xml");
+
+        File of = new File("maven-settings.xml");
+
+        try (FileOutputStream fos = new FileOutputStream(of)) {
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+        return of;
+    }
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -103,6 +122,8 @@ public class WriteConfigCommand implements CommandLineRunner {
         try (FileWriter writer = new FileWriter(config)) {
             yaml.dump(rc, writer);
         }
+
+        makeLocalCopyOfMavenSettings();
 
         System.out.println("Wrote " + config.getAbsolutePath());
         System.out.println("You can edit now the file if you want.");

@@ -6,7 +6,6 @@ import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -22,25 +21,6 @@ public class MavenService {
     public static String BUILD_ONLY_OPTS = "-DskipTests=true -Djqassistant.skip=true";
     public static String BUILD_ALL_OPTS = "-Dmaven.test.failure.ignore=false -Djqassistant.failOnSeverity=INFO";
 
-    public File makeLocalCopyOfMavenSettings() {
-        // TODO: 23.06.18 class path resource verwenden
-        InputStream is = MavenService.class.getResourceAsStream("/settings.xml");
-
-        File of = new File("maven-settings.xml");
-
-        try (FileOutputStream fos = new FileOutputStream(of)) {
-            byte[] buffer = new byte[8 * 1024];
-            int bytesRead;
-            while ((bytesRead = is.read(buffer)) != -1) {
-                fos.write(buffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-
-        return of;
-    }
 
     private File ensureThatLocalRepositoryExists() {
         File lrd = new File("maven-local-repo");
@@ -51,7 +31,7 @@ public class MavenService {
 
 
     public void buildWithoutAnyTests(String directory) {
-        File settings = makeLocalCopyOfMavenSettings();
+        File settings = new File("maven-settings.xml");
         File repo = ensureThatLocalRepositoryExists();
 
         File log = new LogfileNameBuilder().inDirectory("log")
@@ -108,7 +88,7 @@ public class MavenService {
     }
 
     public void buildWithAllTests(String directory) {
-        File settings = makeLocalCopyOfMavenSettings();
+        File settings = new File("maven-settings.xml");
         File repo = ensureThatLocalRepositoryExists();
 
         File log = new LogfileNameBuilder().inDirectory("log")
