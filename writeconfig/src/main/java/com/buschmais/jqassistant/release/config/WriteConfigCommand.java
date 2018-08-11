@@ -22,10 +22,7 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootApplication(scanBasePackages = {
     "com.buschmais.jqassistant.release.core",
@@ -124,7 +121,18 @@ public class WriteConfigCommand implements CommandLineRunner {
         }
 
         makeLocalCopyOfMavenSettings();
+        Properties properties = new Properties();
+        properties.put("gpg.keyid", "...");
+        properties.put("gpg.passphrase", "...");
 
+
+        try (OutputStream os = new FileOutputStream("gpg.properties")) {
+            properties.store(os, "# noop");
+        }
+
+        System.out.println("Wrote gpg.properties");
+        System.out.println("Please provide your GPG key and passphrase.");
+        System.out.println();
         System.out.println("Wrote maven-settings.xml for Maven.");
         System.out.println("Please provide your credentials for the deployment to OSS Sonatype.");
         System.out.println();
