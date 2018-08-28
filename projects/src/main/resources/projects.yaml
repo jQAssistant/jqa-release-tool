@@ -37,13 +37,13 @@ scmurl: git@github.com:jqara/jqa-core-framework.git
 order: 60
 id: 'com.buschmais.jqassistant:jqassistant.plugin.plugin-parent'
 name: jQA Plugin Parent
-scmurl: git@github.com:buschmais/jqa-plugin-parent.git
+scmurl: git@github.com:jqara/jqa-plugin-parent.git
 
 ---
 order: 70
 id: 'com.buschmais.jqassistant.plugin:common'
 name: jQA Plugin Common
-scmurl: git@github.com:buschmais/jqa-plugin-common.git
+scmurl: git@github.com:jqara/jqa-plugin-common.git
 
 ---
 order: 80
