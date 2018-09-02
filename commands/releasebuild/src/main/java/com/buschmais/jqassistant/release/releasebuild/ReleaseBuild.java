@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.release.fullbuild;
+package com.buschmais.jqassistant.release.releasebuild;
 
 import com.buschmais.jqassistant.release.core.ProjectRepository;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
