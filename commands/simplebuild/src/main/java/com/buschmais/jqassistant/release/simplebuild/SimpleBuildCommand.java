@@ -4,6 +4,7 @@ import com.buschmais.jqassistant.release.core.ProjectRepository;
 import com.buschmais.jqassistant.release.core.ProjectVersion;
 import com.buschmais.jqassistant.release.core.ReleaseConfig;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
+import com.buschmais.jqassistant.release.services.maven.MavenRequest;
 import com.buschmais.jqassistant.release.services.maven.MavenService;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -20,9 +21,8 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
 import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
@@ -61,23 +61,33 @@ public class SimpleBuildCommand implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
 
+        System.out.println(AnsiOutput.toString(AnsiColor.BRIGHT_GREEN, "Building jQA without any tests execution and " +
+            "without a run of jQAssistant", AnsiColor.DEFAULT));
 
         try {
             for (ProjectRepository p : projects) {
+                MavenRequest request = getMavenRequest(p.getHumanName());
                 String s = AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW,
                                                "About to run a simple Maven build for ",
                                                BOLD, AnsiColor.BRIGHT_YELLOW, "'",
                                                p.getName(),
                                                NORMAL, "'", AnsiColor.DEFAULT);
                 System.out.println(s);
-                String directory = p.getHumanName();
-
-
-
-                mavenService.buildWithoutAnyTests(directory);
+                mavenService.doRequest(request);
             }
         } catch (Throwable t) {
             t.printStackTrace();
         }
     }
+
+    protected MavenRequest getMavenRequest(String project) {
+        MavenRequest request = new MavenRequest();
+
+        request.setGoals(Arrays.asList("clean", "install"));
+        request.setParameters(List.of("-DskipTests=true", "-Djqassistant.skip=true"));
+        request.setWorkingDir(project);
+
+        return request;
+    }
+
 }
