@@ -28,7 +28,7 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
     "com.buschmais.jqassistant.release.repository",
     "com.buschmais.jqassistant.release.services.maven"
 })
-public class ReleaseBuild implements CommandLineRunner {
+public class ReleaseBuildCommand implements CommandLineRunner {
 
     @Autowired
     private MavenService mavenService;
@@ -45,7 +45,7 @@ public class ReleaseBuild implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(ReleaseBuild.class);
+        SpringApplication app = new SpringApplication(ReleaseBuildCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
         ConfigurableApplicationContext run = app.run(args);
         int exitCode = SpringApplication.exit(run);
