@@ -15,12 +15,16 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>checkout</module>
+        <module>clean</module>
         <module>fullbuild</module>
         <module>jqausages</module>
         <module>releasebuild</module>
-        <module>simplebuild</module>
         <module>showcurrentversions</module>
+        <module>simplebuild</module>
+        <module>showconfig</module>
         <module>updatetorelease</module>
+        <module>writeconfig</module>
     </modules>
 
 

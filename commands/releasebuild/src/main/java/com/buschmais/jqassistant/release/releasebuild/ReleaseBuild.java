@@ -57,13 +57,9 @@ public class ReleaseBuild implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
 
-        Properties properties = new Properties();
-
-        try (var is = new FileInputStream("gpg.properties")) {
-            properties.load(is);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println(AnsiOutput.toString(AnsiColor.BRIGHT_GREEN, "Building jQA release with execution of unit tests and with a run of jQAssistant", AnsiColor.DEFAULT));
+        System.out.println(AnsiOutput.toString(AnsiColor.BRIGHT_GREEN, "Build artifacts will be uploaded to a staging repository at OSS Sonatype", AnsiColor.DEFAULT));
+        System.out.println(AnsiOutput.toString(AnsiColor.BRIGHT_RED, "Integration tests will not be executed at the moment.", AnsiColor.DEFAULT));
 
 
         try {
@@ -102,7 +98,7 @@ public class ReleaseBuild implements CommandLineRunner {
 
         request.setGoals(Arrays.asList("clean", "install", "deploy"));
         request.setParameters(List.of(p1, p2, "-Dmaven.test.failure.ignore=false",
-                                      "-Djqassistant.skip=true"));
+                                      "-Djqassistant.skip=false"));
         request.setProfiles(List.of("release"));
         request.setWorkingDir(project);
 

@@ -135,12 +135,7 @@
     </build>
 
     <modules>
-        <module>clean</module>
         <module>core</module>
-        <module>projects</module>
-        <module>checkout</module>
-        <module>writeconfig</module>
-        <module>showconfig</module>
         <module>commands</module>
         <module>install</module>
         <module>services</module>

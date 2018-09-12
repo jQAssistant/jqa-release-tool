@@ -37,12 +37,12 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>com.buschmais.jqassistant.release</groupId>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
             <artifactId>checkout</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.buschmais.jqassistant.release</groupId>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
             <artifactId>clean</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -52,7 +52,7 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.buschmais.jqassistant.release</groupId>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
             <artifactId>showconfig</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -77,7 +77,7 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.buschmais.jqassistant.release</groupId>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
             <artifactId>writeconfig</artifactId>
             <version>${project.version}</version>
         </dependency>
