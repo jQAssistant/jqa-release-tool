@@ -10,8 +10,8 @@
         <version>1.3.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>clean</artifactId>
-    <name>jQAssistant RT Clean</name>
+    <artifactId>erase</artifactId>
+    <name>jQAssistant RT Erase</name>
 
     <build>
         <plugins>

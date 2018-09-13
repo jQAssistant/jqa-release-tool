@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.release.clean;
+package com.buschmais.jqassistant.release.erase;
 
 import com.buschmais.jqassistant.release.core.ProjectRepository;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
@@ -18,7 +18,7 @@ import java.util.Comparator;
     "com.buschmais.jqassistant.release.core",
     "com.buschmais.jqassistant.release.repository"
 })
-public class CleanCommand implements CommandLineRunner {
+public class EraseCommand implements CommandLineRunner {
 
     private RepositoryProviderService repositorySrv;
 
@@ -32,7 +32,7 @@ public class CleanCommand implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(CleanCommand.class);
+        SpringApplication app = new SpringApplication(EraseCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
         ConfigurableApplicationContext run = app.run(args);
         int exitCode = SpringApplication.exit(run);
