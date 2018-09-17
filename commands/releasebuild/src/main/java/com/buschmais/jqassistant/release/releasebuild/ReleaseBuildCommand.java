@@ -96,7 +96,7 @@ public class ReleaseBuildCommand implements CommandLineRunner {
 
         MavenRequest request = new MavenRequest();
 
-        request.setGoals(Arrays.asList("clean", "install", "deploy"));
+        request.setGoals(Arrays.asList("clean", "deploy"));
         request.setParameters(List.of(p1, p2, "-Dmaven.test.failure.ignore=false",
                                       "-Djqassistant.skip=true"));
         request.setProfiles(List.of("release"));
