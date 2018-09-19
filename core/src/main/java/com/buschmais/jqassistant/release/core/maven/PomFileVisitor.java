@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.release.updatetorelease;
+package com.buschmais.jqassistant.release.core.maven;
 
 import java.io.File;
 import java.io.IOException;

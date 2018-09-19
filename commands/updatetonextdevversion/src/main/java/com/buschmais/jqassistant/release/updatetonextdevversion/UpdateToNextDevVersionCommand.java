@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.release.updatetorelease;
+package com.buschmais.jqassistant.release.updatetonextdevversion;
 
 import com.buschmais.jqassistant.release.core.ProjectRepository;
 import com.buschmais.jqassistant.release.core.ReleaseConfig;
@@ -13,25 +13,12 @@ import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 import org.yaml.snakeyaml.Yaml;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
-import static javax.xml.transform.OutputKeys.OMIT_XML_DECLARATION;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
 import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
@@ -45,8 +32,8 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
     "classpath:project-version-updaters.xml",
     "classpath:project-parent-updaters.xml"
 })
-public class UpdateToReleaseCommand implements CommandLineRunner {
-    private static String BACKUP_EXTENSION = "updatetorelease";
+public class UpdateToNextDevVersionCommand implements CommandLineRunner {
+    private static String BACKUP_EXTENSION = "updatetonextdevversion";
 
     @Autowired
     List<VersionUpdate> updaters;
@@ -63,7 +50,7 @@ public class UpdateToReleaseCommand implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(UpdateToReleaseCommand.class);
+        SpringApplication app = new SpringApplication(UpdateToNextDevVersionCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
         ConfigurableApplicationContext run = app.run(args);
         int exitCode = SpringApplication.exit(run);
@@ -73,6 +60,7 @@ public class UpdateToReleaseCommand implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // todo extract this in class for reuse
         File config = new File("/Users/plexus/jqa-rel-tools/rconfig.yaml");
 
         FileReader r = new FileReader(config);
@@ -84,7 +72,7 @@ public class UpdateToReleaseCommand implements CommandLineRunner {
             var rco = load.stream().filter(x -> x.id.equals(updater.getId())).findFirst();
             var rc = rco.orElseThrow();
 
-            updater.setNextVersion(rc.releaseVersion);
+            updater.setNextVersion(rc.nextVersion);
         });
 
         Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
@@ -101,13 +89,12 @@ public class UpdateToReleaseCommand implements CommandLineRunner {
                                        BOLD, AnsiColor.BRIGHT_YELLOW, "'",
                                        projectRepository.getName(),
                                        NORMAL, AnsiColor.BRIGHT_YELLOW,
-                                       "' to the next release.", AnsiColor.DEFAULT);
+                                       "' to the next dev version.", AnsiColor.DEFAULT);
         System.out.println(s);
         String directory = projectRepository.getHumanName();
         File original = backuper.makeBackUpOfPom(directory);
 
         VersionSetter versionSetter = new VersionSetter();
         versionSetter.set(directory, updaters);
-
     }
 }

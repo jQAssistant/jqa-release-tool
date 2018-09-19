@@ -1,6 +1,4 @@
-package com.buschmais.jqassistant.release.updatetorelease.updates;
-
-import com.buschmais.jqassistant.release.updatetorelease.VersionUpdate;
+package com.buschmais.jqassistant.release.core.maven;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -10,7 +8,7 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 
 
-public class UpdateProjectVersion implements VersionUpdate {
+public class UpdateParent implements VersionUpdate {
 
     private String id;
     private String nextVersion;
@@ -18,7 +16,7 @@ public class UpdateProjectVersion implements VersionUpdate {
     private String artifactId;
 
     public DOMResult update(DOMSource source) throws Exception {
-        InputStream xslt = this.getClass().getResourceAsStream("/xsl/update-project-version.xsl");
+        InputStream xslt = this.getClass().getResourceAsStream("/xsl/update-parent-version.xsl");
 
         //StreamSource source = new StreamSource(sourcePom);
         StreamSource stylesource = new StreamSource(xslt);

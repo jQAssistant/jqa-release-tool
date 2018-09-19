@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.release.updatetorelease;
+package com.buschmais.jqassistant.release.core.maven;
 
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;

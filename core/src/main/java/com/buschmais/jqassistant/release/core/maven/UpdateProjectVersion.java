@@ -1,6 +1,4 @@
-package com.buschmais.jqassistant.release.updatetorelease.updates;
-
-import com.buschmais.jqassistant.release.updatetorelease.VersionUpdate;
+package com.buschmais.jqassistant.release.core.maven;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -10,14 +8,15 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 
 
-public class UpdateCoreFrameworkVersion implements VersionUpdate {
+public class UpdateProjectVersion implements VersionUpdate {
 
     private String id;
-    private String string;
     private String nextVersion;
+    private String groupId;
+    private String artifactId;
 
     public DOMResult update(DOMSource source) throws Exception {
-        InputStream xslt = this.getClass().getResourceAsStream("/xsl/update-version-property.xsl");
+        InputStream xslt = this.getClass().getResourceAsStream("/xsl/update-project-version.xsl");
 
         //StreamSource source = new StreamSource(sourcePom);
         StreamSource stylesource = new StreamSource(xslt);
@@ -27,13 +26,29 @@ public class UpdateCoreFrameworkVersion implements VersionUpdate {
 
         // todo System.out.println("\t" + getPropertyName() + " -> " + getNextVersion());
         DOMResult result = new DOMResult();
-        transformer.setParameter("property_name", getPropertyName());
         transformer.setParameter("version_information", getNextVersion());
+        transformer.setParameter("group_id", getGroupId());
+        transformer.setParameter("artifact_id", getArtifactId());
         transformer.transform(source, result);
 
         return result;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getArtifactId() {
+        return artifactId;
+    }
+
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
+    }
 
     @Override
     public String getNextVersion() {
@@ -53,13 +68,5 @@ public class UpdateCoreFrameworkVersion implements VersionUpdate {
     @Override
     public void setId(String id) {
         this.id = id;
-    }
-
-    public void setPropertyName(String string) {
-        this.string = string;
-    }
-
-    public CharSequence getPropertyName() {
-        return string;
     }
 }

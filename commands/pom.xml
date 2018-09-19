@@ -24,6 +24,7 @@
         <module>showcurrentversions</module>
         <module>simplebuild</module>
         <module>showconfig</module>
+        <module>updatetonextdevversion</module>
         <module>updatetorelease</module>
         <module>writeconfig</module>
     </modules>

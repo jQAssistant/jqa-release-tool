@@ -3,184 +3,184 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="coreframeworkupdate">
         <property name="propertyName" value="jqa-core-framework.version"/>
         <property name="id" value="com.buschmais.jqassistant.core:parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="coreframeworkupdate-it">
         <!-- Required for the jQA Maven Plugin -->
         <property name="propertyName" value="it.jqa.core.version"/>
         <property name="id" value="com.buschmais.jqassistant.core:parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-ejb3-plugin">
         <property name="propertyName" value="jqa-ejb3-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:ejb3"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-distribution-spec">
         <property name="propertyName" value="jqa-distribution-spec.version"/>
         <property name="id" value="com.buschmais.jqassistant:jqa-distribution-specification"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-graphml-plugin">
         <property name="propertyName" value="jqa-graphml-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:graphml"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-maven-plugin">
         <property name="propertyName" value="jqa-maven-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant:jqassistant-maven-plugin"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-commandline">
         <property name="propertyName" value="jqa-commandline-tool.version"/>
         <property name="id" value="com.buschmais.jqassistant.cli:parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-neo4j-backend">
         <property name="propertyName" value="jqa-neo4jbackend.version"/>
         <property name="id" value="com.buschmais.jqassistant.neo4jserver:parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-asciidoctor-utilities">
         <property name="propertyName" value="jqa-asciidoctor-utilities.version"/>
         <property name="id" value="com.buschmais.jqassistant:asciidoctor-utilities"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-xml-plugin">
         <property name="propertyName" value="jqa-xml-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:xml"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-java-plugin">
         <property name="propertyName" value="jqa-java-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:java"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-java-plugin-it">
         <!-- Required for the jQA Maven Plugin. -->
         <property name="propertyName" value="it.jqa.java-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:java"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-java8-plugin">
         <property name="propertyName" value="jqa-java8-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:java8"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-cdi-plugin">
         <property name="propertyName" value="jqa-cdi-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:cdi"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-plugin-common">
         <property name="propertyName" value="jqa-plugin-common.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:common"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-plugin-common-it">
         <!-- For the jQA Maven Plugin required. -->
         <property name="propertyName" value="it.jqa.plugin-common.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:common"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-json-plugin">
         <property name="propertyName" value="jqa-json-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:json"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-junit-plugin">
         <property name="propertyName" value="jqa-junit-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:junit"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-m2repo-plugin">
         <property name="propertyName" value="jqa-m2repo-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:m2repo"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-maven3-plugin">
         <property name="propertyName" value="jqa-maven3-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:maven3"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-jpa2-plugin">
         <property name="propertyName" value="jqa-jpa2-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:jpa2"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-own-constraints">
         <property name="propertyName" value="jqa-own-constraints.version"/>
         <property name="id" value="com.buschmais.jqassistant:own-constraints"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-rdbms-plugin">
         <property name="propertyName" value="jqa-rdbms-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:rdbms"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-jaxrs-plugin">
         <property name="propertyName" value="jqa-jaxrs-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:jaxrs"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-javaee6-plugin">
         <property name="propertyName" value="jqa-javaee6-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:javaee6"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-osgi-plugin">
         <property name="propertyName" value="jqa-osgi-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:osgi"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-spring-plugin">
         <property name="propertyName" value="jqa-spring-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:spring"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-testng-plugin">
         <property name="propertyName" value="jqa-testng-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:testng"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-tycho-plugin">
         <property name="propertyName" value="jqa-tycho-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:tycho"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.updatetorelease.updates.UpdateCoreFrameworkVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-yaml-plugin">
         <property name="propertyName" value="jqa-yaml-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:yaml"/>
