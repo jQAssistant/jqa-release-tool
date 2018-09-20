@@ -27,6 +27,8 @@
         <module>updatetonextdevversion</module>
         <module>updatetorelease</module>
         <module>writeconfig</module>
+        <module>commitchanges</module>
+        <module>pushchanges</module>
     </modules>
 
 

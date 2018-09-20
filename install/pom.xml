@@ -96,5 +96,15 @@
             <artifactId>updatetorelease</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
+            <artifactId>commitchanges</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
+            <artifactId>pushchanges</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
