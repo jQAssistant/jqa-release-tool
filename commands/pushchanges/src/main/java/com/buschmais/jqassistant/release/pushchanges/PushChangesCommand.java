@@ -49,8 +49,8 @@ public class PushChangesCommand implements CommandLineRunner {
 
             Iterable<PushResult> gh = Git.open(new File(projectRepository.getHumanName()))
                                          .push().setRemote(remote).setOutputStream(System.out)
-                                         //.setPushTags()
-
+                                         .setPushAll()
+                                         .setPushTags()
                                          .call();
 
             for (PushResult result : gh) {

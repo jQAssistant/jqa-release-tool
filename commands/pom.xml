@@ -29,6 +29,7 @@
         <module>writeconfig</module>
         <module>commitchanges</module>
         <module>pushchanges</module>
+        <module>tagrelease</module>
     </modules>
 
 
