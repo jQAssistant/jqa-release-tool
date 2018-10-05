@@ -92,7 +92,7 @@ public class UpdateToNextDevVersionCommand implements CommandLineRunner {
                                        "' to the next dev version.", AnsiColor.DEFAULT);
         System.out.println(s);
         String directory = projectRepository.getHumanName();
-        File original = backuper.makeBackUpOfPom(directory);
+        backuper.makeBackUpOfPom(directory);
 
         VersionSetter versionSetter = new VersionSetter();
         versionSetter.set(directory, updaters);

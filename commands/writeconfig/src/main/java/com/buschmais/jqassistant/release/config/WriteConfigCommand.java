@@ -1,17 +1,14 @@
 package com.buschmais.jqassistant.release.config;
 
 import com.buschmais.jqassistant.release.core.ProjectVersion;
-import com.buschmais.jqassistant.release.core.RTException;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.core.ReleaseConfig;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.shared.release.versions.VersionParseException;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -51,7 +48,7 @@ public class WriteConfigCommand implements ApplicationRunner {
         System.exit(exitCode);
     }
 
-    public void makeLocalCopyOfMavenSettings() {
+    public void makeLocalCopyOfMavenSettings() throws Exception {
         // TODO: 23.06.18 class path resource verwenden
         InputStream is = WriteConfigCommand.class.getResourceAsStream("/settings.xml");
 
@@ -64,8 +61,7 @@ public class WriteConfigCommand implements ApplicationRunner {
                 fos.write(buffer, 0, bytesRead);
             }
         } catch (IOException e) {
-            var rt = new RTException("Failed to write " + MAVEN_SETTING_FILE, e, true, false);
-            throw rt;
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to write " + MAVEN_SETTING_FILE);
         }
 
         String s1 = AnsiOutput.toString(BRIGHT_YELLOW, "Wrote Maven settings file '",
@@ -82,6 +78,7 @@ public class WriteConfigCommand implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments __) throws Exception {
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Writing configuration files", DEFAULT));
         makeLocalCopyOfMavenSettings();
         writeGPGPropertiesFile();
         generateVersionConfig();
@@ -92,7 +89,7 @@ public class WriteConfigCommand implements ApplicationRunner {
         System.out.println(mf);
     }
 
-    private void generateVersionConfig() {
+    private void generateVersionConfig() throws Exception {
         var config = new File(VERSION_CONFIG_FILE);
 
         var options = new DumperOptions();
@@ -127,11 +124,9 @@ public class WriteConfigCommand implements ApplicationRunner {
             try (var writer = new FileWriter(config)) {
                 yaml.dump(rc, writer);
             }
-        } catch (IOException | XmlPullParserException | VersionParseException e) {
-            var rt = new RTException("Failed to generate and write " + VERSION_CONFIG_FILE, e, true, false);
-            throw rt;
+        } catch (Exception e) {
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to generate and write " + VERSION_CONFIG_FILE);
         }
-
 
         var s1 = AnsiOutput.toString(BRIGHT_YELLOW, "Wrote version configuration file '",
                                      BOLD, VERSION_CONFIG_FILE, NORMAL, "'", DEFAULT);
@@ -143,7 +138,7 @@ public class WriteConfigCommand implements ApplicationRunner {
         System.out.println();
     }
 
-    private void writeGPGPropertiesFile() throws IOException {
+    private void writeGPGPropertiesFile() throws Exception {
         Properties properties = new Properties();
         properties.put("gpg.keyid", "...");
         properties.put("gpg.passphrase", "...");
@@ -151,8 +146,7 @@ public class WriteConfigCommand implements ApplicationRunner {
         try (OutputStream os = new FileOutputStream(GPG_PROP_FILE)) {
             properties.store(os, "# noop");
         } catch (IOException e) {
-            var rt = new RTException("Failed to write " + GPG_PROP_FILE, e, true, false);
-            throw rt;
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to write " + GPG_PROP_FILE);
         }
 
         var s1 = AnsiOutput.toString(BRIGHT_YELLOW, "Wrote configuration file '",
