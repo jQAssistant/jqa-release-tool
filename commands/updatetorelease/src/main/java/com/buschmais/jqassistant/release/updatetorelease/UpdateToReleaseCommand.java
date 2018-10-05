@@ -35,9 +35,8 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
     "classpath:project-parent-updaters.xml"
 })
 public class UpdateToReleaseCommand implements ApplicationRunner {
-    public static final String VERSION_CONFIG_FILE = "rconfig.yaml";
-
-    private static String BACKUP_EXTENSION = "updatetorelease";
+    private static final String VERSION_CONFIG_FILE = "rconfig.yaml";
+    private static final String BACKUP_EXTENSION = "updatetorelease";
 
     @Autowired
     private List<VersionUpdate> updaters;
