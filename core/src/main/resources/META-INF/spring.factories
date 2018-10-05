@@ -1,0 +1,3 @@
+org.springframework.boot.SpringBootExceptionReporter=com.buschmais.jqassistant.release.core.RTExceptionHandler,\
+                                                     com.buschmais.jqassistant.release.core.DefaultExceptionHandler
+

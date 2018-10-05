@@ -1,21 +1,15 @@
 package com.buschmais.jqassistant.release.config;
 
-import com.buschmais.jqassistant.release.core.ProjectRepository;
 import com.buschmais.jqassistant.release.core.ProjectVersion;
+import com.buschmais.jqassistant.release.core.RTException;
 import com.buschmais.jqassistant.release.core.ReleaseConfig;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
-import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
-import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.eclipse.jgit.api.CheckoutCommand;
-import org.eclipse.jgit.api.CloneCommand;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.lib.AnyObjectId;
-import org.eclipse.jgit.transport.URIish;
+import org.apache.maven.shared.release.versions.VersionParseException;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
+import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.yaml.snakeyaml.DumperOptions;
@@ -24,13 +18,20 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.*;
 import java.util.*;
 
+import static org.springframework.boot.ansi.AnsiColor.*;
+import static org.springframework.boot.ansi.AnsiStyle.BOLD;
+import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
+
 @SpringBootApplication(scanBasePackages = {
     "com.buschmais.jqassistant.release.core",
     "com.buschmais.jqassistant.release.repository"
 })
-public class WriteConfigCommand implements CommandLineRunner {
+public class WriteConfigCommand implements ApplicationRunner {
+    private static final String GPG_PROP_FILE = "gpg.properties";
+    private static final String MAVEN_SETTING_FILE = "maven-settings.xml";
+    private static final String VERSION_CONFIG_FILE = "rconfig.yaml";
 
-    RepositoryProviderService repositorySrv;
+    private RepositoryProviderService repositorySrv;
 
     public RepositoryProviderService getRepositorySrv() {
         return repositorySrv;
@@ -42,19 +43,19 @@ public class WriteConfigCommand implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(WriteConfigCommand.class);
+        var app = new SpringApplication(WriteConfigCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
-        ConfigurableApplicationContext run = app.run(args);
-        int exitCode = SpringApplication.exit(run);
+        var run = app.run(args);
+        var exitCode = SpringApplication.exit(run);
 
         System.exit(exitCode);
     }
 
-    public File makeLocalCopyOfMavenSettings() {
+    public void makeLocalCopyOfMavenSettings() {
         // TODO: 23.06.18 class path resource verwenden
         InputStream is = WriteConfigCommand.class.getResourceAsStream("/settings.xml");
 
-        File of = new File("maven-settings.xml");
+        File of = new File(MAVEN_SETTING_FILE);
 
         try (FileOutputStream fos = new FileOutputStream(of)) {
             byte[] buffer = new byte[8 * 1024];
@@ -63,81 +64,106 @@ public class WriteConfigCommand implements CommandLineRunner {
                 fos.write(buffer, 0, bytesRead);
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            var rt = new RTException("Failed to write " + MAVEN_SETTING_FILE, e, true, false);
+            throw rt;
         }
 
-        return of;
+        String s1 = AnsiOutput.toString(BRIGHT_YELLOW, "Wrote Maven settings file '",
+                                        BOLD, MAVEN_SETTING_FILE, NORMAL, "'", DEFAULT);
+
+        String s2 = AnsiOutput.toString(BRIGHT_YELLOW, "Enter your credentials for the deployment ",
+                                        "to OSS Sonatype in this file.", DEFAULT);
+
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println();
     }
 
 
     @Override
-    public void run(String... args) throws Exception {
-        File config = new File("rconfig.yaml");
+    public void run(ApplicationArguments __) throws Exception {
+        makeLocalCopyOfMavenSettings();
+        writeGPGPropertiesFile();
+        generateVersionConfig();
 
-        ReleaseConfig a = new ReleaseConfig();
-        a.currentVersion = "a";
-        a.nextVersion = "b";
-        a.releaseVersion = "c";
+        var mf = AnsiOutput.toString(BRIGHT_YELLOW, "Use the command showconfig to display the ",
+                                     "effective configuration.", DEFAULT);
 
-        ReleaseConfig b = new ReleaseConfig();
-        b.currentVersion = "a";
-        b.nextVersion = "b";
-        b.releaseVersion = "c";
+        System.out.println(mf);
+    }
 
-        DumperOptions options = new DumperOptions();
+    private void generateVersionConfig() {
+        var config = new File(VERSION_CONFIG_FILE);
+
+        var options = new DumperOptions();
         options.setCanonical(false);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        Yaml yaml = new Yaml(options);
+        var yaml = new Yaml(options);
 
-        List<ReleaseConfig> rc = new LinkedList<>();
-        Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
+        var rc = new LinkedList<>();
+        var projects = getRepositorySrv().getProjectRepositories();
 
-        for (ProjectRepository p : projects) {
-            var path = p.getHumanName() + "/pom.xml";
+        try {
+            for (var project : projects) {
+                var path = project.getHumanName() + "/pom.xml";
 
-            //System.out.println(path);
-            FileInputStream fis = new FileInputStream(path);
-            MavenXpp3Reader reader = new MavenXpp3Reader();
-            Model model = reader.read(fis);
-            //System.out.println(model.getVersion());
+                try (var fis = new FileInputStream(path)) {
+                    var reader = new MavenXpp3Reader();
+                    var model = reader.read(fis);
+                    var dav = new ProjectVersion(model.getVersion());
+                    var id = model.getGroupId() + ":" + model.getArtifactId();
+                    var releaseConfig = new ReleaseConfig();
 
-            ProjectVersion dav = new ProjectVersion(model.getVersion());
+                    releaseConfig.id = id;
+                    releaseConfig.name = model.getName();
+                    releaseConfig.currentVersion = dav.toString();
+                    releaseConfig.releaseVersion = dav.getReleaseVersionString();
+                    releaseConfig.nextVersion = dav.getNextVersion().toString();
 
-            var id = model.getGroupId() + ":" + model.getArtifactId();
-            var c = new ReleaseConfig();
-            c.id = id;
-            c.name = model.getName();
-            c.currentVersion = dav.toString();
-            c.releaseVersion = dav.getReleaseVersionString();
-            c.nextVersion = dav.getNextVersion().toString();
+                    rc.addLast(releaseConfig);
+                }
+            }
 
-            //System.out.println(model.getName());
-            ((LinkedList<ReleaseConfig>) rc).addLast(c);
+            try (var writer = new FileWriter(config)) {
+                yaml.dump(rc, writer);
+            }
+        } catch (IOException | XmlPullParserException | VersionParseException e) {
+            var rt = new RTException("Failed to generate and write " + VERSION_CONFIG_FILE, e, true, false);
+            throw rt;
         }
 
-        try (FileWriter writer = new FileWriter(config)) {
-            yaml.dump(rc, writer);
-        }
 
-        makeLocalCopyOfMavenSettings();
+        var s1 = AnsiOutput.toString(BRIGHT_YELLOW, "Wrote version configuration file '",
+                                     BOLD, VERSION_CONFIG_FILE, NORMAL, "'", DEFAULT);
+        var s2 = AnsiOutput.toString(BRIGHT_YELLOW, "Check the computed version information and ",
+                                     "change them if needed.", DEFAULT);
+
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println();
+    }
+
+    private void writeGPGPropertiesFile() throws IOException {
         Properties properties = new Properties();
         properties.put("gpg.keyid", "...");
         properties.put("gpg.passphrase", "...");
 
-
-        try (OutputStream os = new FileOutputStream("gpg.properties")) {
+        try (OutputStream os = new FileOutputStream(GPG_PROP_FILE)) {
             properties.store(os, "# noop");
+        } catch (IOException e) {
+            var rt = new RTException("Failed to write " + GPG_PROP_FILE, e, true, false);
+            throw rt;
         }
 
-        System.out.println("Wrote gpg.properties");
-        System.out.println("Please provide your GPG key and passphrase.");
+        var s1 = AnsiOutput.toString(BRIGHT_YELLOW, "Wrote configuration file '",
+                                     BOLD, BRIGHT_YELLOW, GPG_PROP_FILE,
+                                     NORMAL, "'", DEFAULT);
+        var s2 = AnsiOutput.toString(BRIGHT_YELLOW, "Enter your GPG key and passphrase ",
+                                     "in this file.", DEFAULT);
+
+
+        System.out.println(s1);
+        System.out.println(s2);
         System.out.println();
-        System.out.println("Wrote maven-settings.xml for Maven.");
-        System.out.println("Please provide your credentials for the deployment to OSS Sonatype.");
-        System.out.println();
-        System.out.println("Wrote " + config.getAbsolutePath());
-        System.out.println("You can edit now the configuration file if you want.");
-        System.out.println("Use showconfig to display the effective configuration.");
     }
 }
