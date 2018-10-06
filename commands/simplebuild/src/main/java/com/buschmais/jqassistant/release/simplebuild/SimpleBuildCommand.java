@@ -2,6 +2,7 @@ package com.buschmais.jqassistant.release.simplebuild;
 
 import com.buschmais.jqassistant.release.core.ProjectRepository;
 import com.buschmais.jqassistant.release.core.ProjectVersion;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.core.ReleaseConfig;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
 import com.buschmais.jqassistant.release.services.maven.MavenRequest;
@@ -9,9 +10,7 @@ import com.buschmais.jqassistant.release.services.maven.MavenService;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
 import org.springframework.boot.ansi.AnsiColor;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,7 +31,7 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
     "com.buschmais.jqassistant.release.repository",
     "com.buschmais.jqassistant.release.services.maven"
 })
-public class SimpleBuildCommand implements CommandLineRunner {
+public class SimpleBuildCommand implements ApplicationRunner {
 
     @Autowired
     MavenService mavenService;
@@ -58,7 +57,7 @@ public class SimpleBuildCommand implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(ApplicationArguments __) throws Exception {
         Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
 
         System.out.println(AnsiOutput.toString(AnsiColor.BRIGHT_GREEN, "Building jQA without any tests execution and " +
@@ -75,8 +74,8 @@ public class SimpleBuildCommand implements CommandLineRunner {
                 System.out.println(s);
                 mavenService.doRequest(request);
             }
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (Exception e) {
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to perform a simple build for all projects.");
         }
     }
 
