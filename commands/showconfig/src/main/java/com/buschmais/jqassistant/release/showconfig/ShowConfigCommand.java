@@ -1,11 +1,10 @@
 package com.buschmais.jqassistant.release.showconfig;
 
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.core.ReleaseConfig;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
+import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -13,35 +12,44 @@ import java.io.FileReader;
 import java.util.List;
 
 import static java.lang.String.format;
+import static org.springframework.boot.ansi.AnsiColor.*;
 
 @SpringBootApplication(scanBasePackages = {
     "com.buschmais.jqassistant.release.core",
     "com.buschmais.jqassistant.release.showconfig"
 })
-public class ShowConfigCommand implements CommandLineRunner {
+public class ShowConfigCommand implements ApplicationRunner {
+    private static final String VERSION_CONFIG_FILE = "rconfig.yaml";
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(ShowConfigCommand.class);
+        var app = new SpringApplication(ShowConfigCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
-        ConfigurableApplicationContext run = app.run(args);
-        int exitCode = SpringApplication.exit(run);
+        var run = app.run(args);
+        var exitCode = SpringApplication.exit(run);
 
         System.exit(exitCode);
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        File config = new File("/Users/plexus/jqa-rel-tools/rconfig.yaml");
+    public void run(ApplicationArguments __) throws Exception {
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Showing the configured versions for the release", DEFAULT));
 
-        FileReader r = new FileReader(config);
-        Yaml y = new Yaml();
-        var load = y.<List<ReleaseConfig>>load(r);
+        try {
+            var configFile = new File(VERSION_CONFIG_FILE);
 
-        load.forEach(rc -> {
-            var l2 = format("%-40s : %-15s -> %-5s -> %-15s",
-                            rc.name, rc.currentVersion,
-                            rc.releaseVersion, rc.nextVersion);
-            System.out.println(l2);
-        });
+            try (var fileReader = new FileReader(configFile)) {
+                var versionConfig = new Yaml();
+                var releaseConfigs = versionConfig.<List<ReleaseConfig>>load(fileReader);
+
+                releaseConfigs.forEach(rc -> {
+                    var line = format("%-40s : %-15s -> %-5s -> %-15s",
+                                      rc.name, rc.currentVersion,
+                                      rc.releaseVersion, rc.nextVersion);
+                    System.out.println(line);
+                });
+            }
+        } catch (Exception e) {
+            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to show the configured versions for the release");
+        }
     }
 }
