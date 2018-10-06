@@ -1,17 +1,13 @@
 package com.buschmais.jqassistant.release.jqausages;
 
 import com.buschmais.jqassistant.release.core.ProjectRepository;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
-import com.buschmais.jqassistant.release.services.maven.MavenService;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.DependencyManagement;
-import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.ansi.AnsiColor;
+import org.springframework.boot.*;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,11 +15,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import static java.lang.String.format;
+import static org.springframework.boot.ansi.AnsiColor.*;
+import static org.springframework.boot.ansi.AnsiColor.BRIGHT_GREEN;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
 import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
@@ -32,7 +29,7 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
     "com.buschmais.jqassistant.release.repository",
     "com.buschmais.jqassistant.release.services.maven"
 })
-public class JQAUsagesCommand implements CommandLineRunner {
+public class JQAUsagesCommand implements ApplicationRunner {
 
     private RepositoryProviderService repositorySrv;
 
@@ -55,62 +52,46 @@ public class JQAUsagesCommand implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
+    public void run(ApplicationArguments __) throws Exception {
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Showing the internal jQA dependencies of ",
+                                               "each project", DEFAULT));
 
+        var projects = getRepositorySrv().getProjectRepositories();
 
         try {
             for (ProjectRepository p : projects) {
+                var line = AnsiOutput.toString(BRIGHT_YELLOW, "About to run analyse dependencies of ", BOLD,
+                                               BRIGHT_YELLOW, "'", p.getName(), NORMAL, "'", DEFAULT);
+                System.out.println(line);
 
-                FileInputStream fis = new FileInputStream("/Users/plexus/pom.xml");
-                MavenXpp3Reader reader = new MavenXpp3Reader();
-                Model model = reader.read(fis);
+                var pomPath = p.getHumanName() + "/pom.xml";
+                var pomFile = new File(pomPath);
 
-
-                String s = AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW,
-                                               "About to run analyse dependencies of ",
-                                               BOLD, AnsiColor.BRIGHT_YELLOW, "'",
-                                               p.getName(),
-                                               NORMAL, "'", AnsiColor.DEFAULT);
-                System.out.println(s);
-                String directory = p.getHumanName() + "/pom.xml";
-                File inf = new File(directory);
-//                System.out.println(directory);
-
-//                System.out.println(inf.exists());
-                try (var f = new FileInputStream(inf)) {
-                    MavenXpp3Reader r = new MavenXpp3Reader();
-                    Model m = r.read(f);
+                try (var fis = new FileInputStream(pomFile)) {
+                    var mavenReader = new MavenXpp3Reader();
+                    var model = mavenReader.read(fis);
                     List<List<Dependency>> dod = new LinkedList<>();
 
-                    List<Dependency> dependencies = Optional.ofNullable(m.getDependencyManagement())
+                    var dependencies = Optional.ofNullable(model.getDependencyManagement())
                                                             .orElseGet(DependencyManagement::new)
                                                             .getDependencies();
-                    List<Dependency> dependencies1 = Optional.ofNullable(m.getDependencies())
+                    var dependencies1 = Optional.ofNullable(model.getDependencies())
                                                              .orElseGet(Collections::emptyList);
 
                     dod.add(dependencies);
                     dod.add(dependencies1);
 
-                    dod.stream().flatMap(
-                        (Function<List<Dependency>, Stream<Dependency>>) Collection::stream)
+                    dod.stream()
+                       .flatMap((Function<List<Dependency>, Stream<Dependency>>) Collection::stream)
                        .filter(d -> d.getGroupId().startsWith("com.buschmais.jqassistant"))
-                       .forEach(new Consumer<Dependency>() {
-                        @Override
-                        public void accept(Dependency o) {
-                            System.out.println(o.getGroupId() +":" + o.getArtifactId()+
-                            ":" + o.getType() + ":" + o.getVersion());
-
-                        }
-                    });
+                       .forEach(o -> {
+                           var coord = format("%s:%s:%s", o.getGroupId(), o.getArtifactId(), o.getVersion());
+                           System.out.println(coord);
+                       });
                 }
-
-
-
-
             }
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (Exception e) {
+            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to show internal jQA dependencies.");
         }
     }
 }
