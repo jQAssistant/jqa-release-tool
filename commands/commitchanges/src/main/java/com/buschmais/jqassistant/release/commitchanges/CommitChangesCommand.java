@@ -1,26 +1,24 @@
 package com.buschmais.jqassistant.release.commitchanges;
 
-import com.buschmais.jqassistant.release.core.ProjectRepository;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
-import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.lib.AnyObjectId;
-import org.eclipse.jgit.transport.URIish;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
+import org.springframework.boot.ansi.AnsiColor;
+import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.UUID;
+
+import static org.springframework.boot.ansi.AnsiColor.*;
+import static org.springframework.boot.ansi.AnsiStyle.BOLD;
+import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
 @SpringBootApplication(scanBasePackages = "com.buschmais.jqassistant.release")
-public class CommitChangesCommand implements CommandLineRunner {
+public class CommitChangesCommand implements ApplicationRunner {
 
-    RepositoryProviderService repositorySrv;
+    private RepositoryProviderService repositorySrv;
 
     public RepositoryProviderService getRepositorySrv() {
         return repositorySrv;
@@ -32,29 +30,36 @@ public class CommitChangesCommand implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(CommitChangesCommand.class);
+        var app = new SpringApplication(CommitChangesCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
-        ConfigurableApplicationContext run = app.run(args);
-        int exitCode = SpringApplication.exit(run);
+        var run = app.run(args);
+        var exitCode = SpringApplication.exit(run);
 
         System.exit(exitCode);
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        for (ProjectRepository projectRepository : getRepositorySrv().getProjectRepositories()) {
-            URIish u = new URIish(projectRepository.getRepositoryURL());
-            System.out.println(projectRepository.getHumanName());
+    public void run(ApplicationArguments args) throws Exception {
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Commiting all local changes", DEFAULT));
 
-            Git git = Git.open(new File(projectRepository.getHumanName()));
+        try {
+            for (var projectRepository : getRepositorySrv().getProjectRepositories()) {
+                String s = AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW,
+                                               "Commiting changes in ",
+                                               BOLD, AnsiColor.BRIGHT_YELLOW, "'",
+                                               projectRepository.getHumanName(),
+                                               NORMAL, "'", AnsiColor.DEFAULT);
+                System.out.println(s);
 
-            git.add().setUpdate(true).addFilepattern(".").call();
-            Git.open(new File(projectRepository.getHumanName()))
-               .commit().setCommitter("Oliver B. Fischer", "o.b.fischer@swe-blog.net")
-               .setMessage("DAS IST EIN TEST")
-               .call();
+                Git.open(new File(projectRepository.getHumanName()))
+                   .add().setUpdate(true).addFilepattern(".").call();
+                Git.open(new File(projectRepository.getHumanName()))
+                   .commit().setCommitter("Oliver B. Fischer", "o.b.fischer@swe-blog.net")
+                   .setMessage("DAS IST EIN TEST")
+                   .call();
+            }
+        } catch (Exception e) {
+            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to commit changes in all projects");
         }
     }
-
-
 }
