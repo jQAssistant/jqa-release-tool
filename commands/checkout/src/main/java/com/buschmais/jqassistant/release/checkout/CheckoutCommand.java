@@ -1,26 +1,25 @@
 package com.buschmais.jqassistant.release.checkout;
 
-import com.buschmais.jqassistant.release.core.ProjectRepository;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
-import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.lib.AnyObjectId;
-import org.eclipse.jgit.transport.URIish;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
+import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.UUID;
+
+import static org.springframework.boot.ansi.AnsiColor.BRIGHT_GREEN;
+import static org.springframework.boot.ansi.AnsiColor.BRIGHT_YELLOW;
+import static org.springframework.boot.ansi.AnsiColor.DEFAULT;
+import static org.springframework.boot.ansi.AnsiStyle.BOLD;
+import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
 @SpringBootApplication(scanBasePackages = "com.buschmais.jqassistant.release")
-public class CheckoutCommand implements CommandLineRunner {
+public class CheckoutCommand implements ApplicationRunner {
 
-    RepositoryProviderService repositorySrv;
+    private RepositoryProviderService repositorySrv;
 
     public RepositoryProviderService getRepositorySrv() {
         return repositorySrv;
@@ -32,28 +31,36 @@ public class CheckoutCommand implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(CheckoutCommand.class);
+        var app = new SpringApplication(CheckoutCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
-        ConfigurableApplicationContext run = app.run(args);
-        int exitCode = SpringApplication.exit(run);
+        var run = app.run(args);
+        var exitCode = SpringApplication.exit(run);
 
         System.exit(exitCode);
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        for (ProjectRepository projectRepository : getRepositorySrv().getProjectRepositories()) {
-            URIish u = new URIish(projectRepository.getRepositoryURL());
-            System.out.println(projectRepository.getHumanName());
+    public void run(ApplicationArguments __) {
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Going to checkout all needed projects", DEFAULT));
 
-            Git.cloneRepository()
-               .setURI(projectRepository.getRepositoryURL())
-               .setRemote("gh")
-               .setDirectory(new File(projectRepository.getHumanName()))
-               .call()
-            ;
+        try {
+            for (var projectRepository : getRepositorySrv().getProjectRepositories()) {
+                var s = AnsiOutput.toString(BRIGHT_YELLOW,
+                                            "About to checkout Git repository for project ",
+                                            BOLD, BRIGHT_YELLOW, "'", projectRepository.getName(), NORMAL, BRIGHT_YELLOW,
+                                            "' from '", BOLD, projectRepository.getRepositoryURL(),
+                                            "'", DEFAULT);
+                System.out.println(s);
+
+
+                Git.cloneRepository()
+                   .setURI(projectRepository.getRepositoryURL())
+                   .setRemote("gh")
+                   .setDirectory(new File(projectRepository.getHumanName()))
+                   .call();
+            }
+        } catch (Exception e) {
+            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to close all needed projects.");
         }
     }
-
-
 }
