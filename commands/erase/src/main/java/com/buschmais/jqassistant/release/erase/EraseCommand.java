@@ -1,11 +1,12 @@
 package com.buschmais.jqassistant.release.erase;
 
 import com.buschmais.jqassistant.release.core.ProjectRepository;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.*;
+import org.springframework.boot.ansi.AnsiColor;
+import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -14,11 +15,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 
+import static org.springframework.boot.ansi.AnsiColor.*;
+import static org.springframework.boot.ansi.AnsiColor.BRIGHT_GREEN;
+import static org.springframework.boot.ansi.AnsiStyle.BOLD;
+import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
+
 @SpringBootApplication(scanBasePackages = {
     "com.buschmais.jqassistant.release.core",
     "com.buschmais.jqassistant.release.repository"
 })
-public class EraseCommand implements CommandLineRunner {
+public class EraseCommand implements ApplicationRunner {
 
     private RepositoryProviderService repositorySrv;
 
@@ -32,30 +38,38 @@ public class EraseCommand implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(EraseCommand.class);
+        var app = new SpringApplication(EraseCommand.class);
         app.setBannerMode(Banner.Mode.OFF);
-        ConfigurableApplicationContext run = app.run(args);
-        int exitCode = SpringApplication.exit(run);
+        var run = app.run(args);
+        var exitCode = SpringApplication.exit(run);
 
         System.exit(exitCode);
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        System.out.println("DELETING");
-        for (ProjectRepository p : getRepositorySrv().getProjectRepositories()) {
-            String humanName = p.getHumanName();
-            File f = new File(humanName);
+    public void run(ApplicationArguments args) throws Exception {
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN,
+                                               "Deleting all jQA repositories from your disk",
+                                               DEFAULT));
 
-            System.out.println("D: " + f);
+        try {
+            for (var repository : getRepositorySrv().getProjectRepositories()) {
+                var humanName = repository.getHumanName();
+                var projectDirectory = new File(humanName);
 
-            if (f.exists()) {
-                Files.walk(f.toPath())
-                     .sorted(Comparator.reverseOrder())
-                     .map(Path::toFile)
-                     .forEach(File::delete);
+                String s = AnsiOutput.toString(BRIGHT_YELLOW, "Deleting repository ", BOLD, BRIGHT_YELLOW, "'",
+                                               projectDirectory.getName(), NORMAL, "'", DEFAULT);
+                System.out.println(s);
+
+                if (projectDirectory.exists()) {
+                    Files.walk(projectDirectory.toPath())
+                         .sorted(Comparator.reverseOrder())
+                         .map(Path::toFile)
+                         .forEach(File::delete);
+                }
             }
-
+        } catch (Exception e) {
+            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to delete all project directories");
         }
     }
 }
