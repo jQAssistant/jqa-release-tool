@@ -1,5 +1,6 @@
 package com.buschmais.jqassistant.release.commitchanges;
 
+import com.buschmais.jqassistant.release.core.RTException;
 import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
 import org.eclipse.jgit.api.Git;
@@ -9,7 +10,10 @@ import org.springframework.boot.ansi.AnsiColor;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.File;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.boot.ansi.AnsiColor.*;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
@@ -17,6 +21,7 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
 @SpringBootApplication(scanBasePackages = "com.buschmais.jqassistant.release")
 public class CommitChangesCommand implements ApplicationRunner {
+    private static final String MESSAGE_OPTION = "message";
 
     private RepositoryProviderService repositorySrv;
 
@@ -39,7 +44,13 @@ public class CommitChangesCommand implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments arguments) throws Exception {
+
+        var messageFile = getFile(arguments);
+        var message = readMessageFromFile(messageFile);
+
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Going to checkout all needed projects", DEFAULT));
+
         System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Commiting all local changes", DEFAULT));
 
         try {
@@ -55,11 +66,52 @@ public class CommitChangesCommand implements ApplicationRunner {
                    .add().setUpdate(true).addFilepattern(".").call();
                 Git.open(new File(projectRepository.getHumanName()))
                    .commit().setCommitter("Oliver B. Fischer", "o.b.fischer@swe-blog.net")
-                   .setMessage("DAS IST EIN TEST")
+                   .setMessage(message)
                    .call();
             }
         } catch (Exception e) {
             RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to commit changes in all projects");
         }
+    }
+
+    private String readMessageFromFile(File file) {
+        var result = "";
+        try {
+            List<String> content = Files.readAllLines(file.toPath());
+            result = content.stream().collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+            throw new RTException("Failed to read " + file.getPath());
+        }
+
+        return result;
+    }
+
+    private File getFile(ApplicationArguments arguments) {
+        if (!arguments.containsOption(MESSAGE_OPTION)) {
+            throw new RTException("Option --" + MESSAGE_OPTION + " is missing");
+        }
+
+        var values = arguments.getOptionValues(MESSAGE_OPTION);
+
+        if (values.isEmpty()) {
+            throw new RTException("Value for --" + MESSAGE_OPTION + " is missing.");
+        }
+
+        var value = values.get(0);
+        var messageFile = new File(value);
+
+        if (Files.isDirectory(messageFile.toPath())) {
+            throw new RTException(value + " is a directory");
+        }
+
+        if (!Files.exists(messageFile.toPath())) {
+            throw new RTException(value + " does not exist");
+        }
+
+        if (!Files.isReadable(messageFile.toPath())) {
+            throw new RTException(value + " is not readable");
+        }
+
+        return messageFile;
     }
 }
