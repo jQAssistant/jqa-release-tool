@@ -1,25 +1,18 @@
 package com.buschmais.jqassistant.release.clean;
 
-import com.buschmais.jqassistant.release.core.ProjectRepository;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
 import com.buschmais.jqassistant.release.services.maven.MavenRequest;
 import com.buschmais.jqassistant.release.services.maven.MavenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.ansi.AnsiColor;
+import org.springframework.boot.*;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Set;
 
+import static org.springframework.boot.ansi.AnsiColor.*;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
 import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
@@ -28,7 +21,7 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
     "com.buschmais.jqassistant.release.repository",
     "com.buschmais.jqassistant.release.services.maven"
 })
-public class CleanCommand implements CommandLineRunner {
+public class CleanCommand implements ApplicationRunner {
 
     private RepositoryProviderService repositorySrv;
     private MavenService mavenService;
@@ -61,31 +54,28 @@ public class CleanCommand implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
+    public void run(ApplicationArguments __) throws Exception {
+        var projects = getRepositorySrv().getProjectRepositories();
 
-        System.out.println(AnsiOutput.toString(AnsiColor.BRIGHT_GREEN, "Cleaning the build", AnsiColor.DEFAULT));
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Cleaning the Maven build of all projects", DEFAULT));
 
         try {
-            for (ProjectRepository p : projects) {
-                MavenRequest request = getMavenRequest(p.getHumanName());
+            for (var project : projects) {
+                var request = getMavenRequest(project.getHumanName());
 
-                String s = AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW,
-                                               "About to run a Maven clean for ",
-                                               BOLD, AnsiColor.BRIGHT_YELLOW, "'",
-                                               p.getName(),
-                                               NORMAL, "'", AnsiColor.DEFAULT);
+                var s = AnsiOutput.toString(BRIGHT_YELLOW, "About to run a Maven clean for ",
+                                            BOLD, BRIGHT_YELLOW, "'", project.getName(), NORMAL, "'", DEFAULT);
                 System.out.println(s);
 
                 mavenService.doRequest(request);
             }
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (Exception e) {
+            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to clean all Maven builds");
         }
     }
 
     protected MavenRequest getMavenRequest(String project) {
-        MavenRequest request = new MavenRequest();
+        var request = new MavenRequest();
 
         request.setGoals(Arrays.asList("clean"));
         request.setWorkingDir(project);
