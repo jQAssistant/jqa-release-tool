@@ -15,6 +15,7 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 @Service
 public class MavenService {
     private File ensureThatLocalRepositoryExists() {
+        // todo Directory should be determined by the settings.xml
         var repoDir = new File("maven-local-repo");
         repoDir.mkdirs();
 
@@ -26,6 +27,7 @@ public class MavenService {
         var workingDirectory = request.getWorkingDir();
         var repo = ensureThatLocalRepositoryExists();
 
+        // todo Keyword in the name of the log file should reflect the actual command
         var log = new LogfileNameBuilder().inDirectory("log")
                                           .withPrefix("jqa").withProjectName(request.getWorkingDir())
                                           .withKeyword("releasebuild").withDate().build();
@@ -41,6 +43,7 @@ public class MavenService {
         ir.setUpdateSnapshots(false);
         ir.setInteractive(false);
         ir.setProfiles(request.getProfiles());
+        // todo Use $JAVA_HOME as source
         ir.setJavaHome(new File("/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home"));
 
         var invoker = new DefaultInvoker();
