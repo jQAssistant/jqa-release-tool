@@ -76,6 +76,12 @@ name: jQA YAML Plugin
 scmurl: git@github.com:jqara/jqa-yaml-plugin.git
 
 ---
+order: 122
+id: 'com.buschmais.jqassistant.plugin:yaml2'
+name: jQA YAML 2 Plugin
+scmurl: git@github.com:jqara/jqa-yaml2-plugin.git
+
+---
 order: 130
 id: 'com.buschmais.jqassistant.plugin:junit'
 name: jQA JUnit Plugin
