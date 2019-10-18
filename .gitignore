@@ -5,4 +5,5 @@ target
 *~
 *.log
 .DS_Store
+.java-version
 pom.xml.versionsBackup
