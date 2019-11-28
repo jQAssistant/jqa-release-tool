@@ -154,6 +154,12 @@ name: jQA JPA 2 Plugin
 scmurl: git@github.com:jqara/jqa-jpa2-plugin.git
 
 ---
+order: 245
+id: 'com.buschmais.jqassistant.plugin:jqa-asciidoc-report-plugin'
+name: jQA Asciidoctor Report Plugin
+scmurl: git@github.com:jqara/jqa-asciidoc-report-plugin.git
+
+---
 order: 250
 id: 'com.buschmais.jqassistant.plugin:spring'
 name: jQA Spring Plugin
