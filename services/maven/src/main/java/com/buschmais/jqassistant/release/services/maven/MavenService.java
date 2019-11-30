@@ -1,6 +1,9 @@
 package com.buschmais.jqassistant.release.services.maven;
 
+import com.buschmais.jqassistant.release.core.Environment;
+import com.buschmais.jqassistant.release.core.RTException;
 import org.apache.maven.shared.invoker.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ansi.AnsiColor;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.stereotype.Service;
@@ -8,12 +11,25 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 
+import static java.lang.String.format;
 import static org.springframework.boot.ansi.AnsiColor.BRIGHT_RED;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
 import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
 @Service
 public class MavenService {
+
+    private com.buschmais.jqassistant.release.core.Environment environment;
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    @Autowired
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
     private File ensureThatLocalRepositoryExists() {
         // todo Directory should be determined by the settings.xml
         var repoDir = new File("maven-local-repo");
@@ -26,6 +42,8 @@ public class MavenService {
         var settings = new File("maven-settings.xml");
         var workingDirectory = request.getWorkingDir();
         var repo = ensureThatLocalRepositoryExists();
+        var mavenHome = getHomeValueOrAbort("RT_MAVEN_HOME");
+
 
         // todo Keyword in the name of the log file should reflect the actual command
         var log = new LogfileNameBuilder().inDirectory("log")
@@ -44,9 +62,10 @@ public class MavenService {
         ir.setInteractive(false);
         ir.setProfiles(request.getProfiles());
         // todo Use $JAVA_HOME as source
-        ir.setJavaHome(new File("/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home"));
+        ir.setJavaHome(new File("/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home"));
 
         var invoker = new DefaultInvoker();
+        invoker.setMavenHome(new File(mavenHome));
 
         try (var bl = new LogWriter(log)) {
             bl.start();
@@ -68,5 +87,16 @@ public class MavenService {
                 System.out.println(s);
             }
         }
+    }
+
+    private String getHomeValueOrAbort(String variableName) {
+        var variablePresent = getEnvironment().isVariableSet(variableName);
+
+        if (!variablePresent) {
+            var message = format("Environment variable %s is not set", variableName);
+            throw new RTException(message);
+        }
+
+        return getEnvironment().getVariable(variableName);
     }
 }

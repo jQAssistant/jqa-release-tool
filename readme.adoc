@@ -1,5 +1,14 @@
-# jQAssistant Release Tool
+= jQAssistant Release Tool
 
 In progress.
+
+== Required Environment Variables
+
+The following environment variables must be set in order to run
+the release tooling properly.
+
+`RT_MAVEN_HOME`:: Installation directory of the Maven installation to be used.
+`RT_JAVA_HOME`:: Installation directory of the JDK installation to be used.
+
 
 
