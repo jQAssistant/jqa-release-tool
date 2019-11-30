@@ -32,6 +32,13 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
+          id="pro-updater-asciidoctor-report-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:graphml"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="asciidoc-report"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
           id="pro-updater-own-constraints">
         <property name="id" value="com.buschmais.jqassistant:own-constraints"/>
         <property name="groupId" value="com.buschmais.jqassistant"/>
