@@ -43,6 +43,7 @@ public class MavenService {
         var workingDirectory = request.getWorkingDir();
         var repo = ensureThatLocalRepositoryExists();
         var mavenHome = getHomeValueOrAbort("RT_MAVEN_HOME");
+        var javaHome = getHomeValueOrAbort("RT_JAVA_HOME");
 
 
         // todo Keyword in the name of the log file should reflect the actual command
@@ -52,6 +53,8 @@ public class MavenService {
         log.getParentFile().mkdirs();
 
         var ir = new DefaultInvocationRequest();
+        var invoker = new DefaultInvoker();
+
         ir.setPomFile( new File(workingDirectory + "/pom.xml" ) );
         ir.setGoals(request.getGoals());
         ir.setMavenOpts(String.join(" ", request.getParameters()));
@@ -61,10 +64,7 @@ public class MavenService {
         ir.setUpdateSnapshots(false);
         ir.setInteractive(false);
         ir.setProfiles(request.getProfiles());
-        // todo Use $JAVA_HOME as source
-        ir.setJavaHome(new File("/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home"));
-
-        var invoker = new DefaultInvoker();
+        ir.setJavaHome(new File(javaHome));
         invoker.setMavenHome(new File(mavenHome));
 
         try (var bl = new LogWriter(log)) {
