@@ -35,6 +35,12 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
+          id="jqa-graphql-plugin">
+        <property name="propertyName" value="jqa-graphql-plugin.version"/>
+        <property name="id" value="com.buschmais.jqassistant.plugin:graphql"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-asciidoctor-report-plugin">
         <property name="propertyName" value="jqa-asciidoc-report-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:asciidoc-report"/>

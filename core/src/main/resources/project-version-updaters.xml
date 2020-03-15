@@ -32,6 +32,14 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
+          id="pro-updater-graphql-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:graphql"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="graphql"/>
+    </bean>
+
+
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
           id="pro-updater-asciidoctor-report-plugin">
         <property name="id" value="com.buschmais.jqassistant.plugin:graphml"/>
         <property name="groupId" value="com.buschmais.jqassistant.plugin"/>

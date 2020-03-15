@@ -148,6 +148,12 @@ name: jQA GraphML Plugin
 scmurl: git@github.com:jqara/jqa-graphml-plugin.git
 
 ---
+order: 234
+id: 'com.buschmais.jqassistant.plugin:graphql'
+name: jQA GraphQL Plugin
+scmurl: git@github.com:jqara/jqa-graphql-plugin.git
+
+---
 order: 240
 id: 'com.buschmais.jqassistant.plugin:jpa'
 name: jQA JPA 2 Plugin
