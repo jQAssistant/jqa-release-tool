@@ -70,7 +70,7 @@ public class CommitChangesCommand implements ApplicationRunner {
                    .call();
             }
         } catch (Exception e) {
-            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to commit changes in all projects");
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to commit changes in all projects");
         }
     }
 

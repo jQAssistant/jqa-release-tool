@@ -69,7 +69,7 @@ public class EraseCommand implements ApplicationRunner {
                 }
             }
         } catch (Exception e) {
-            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to delete all project directories");
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to delete all project directories");
         }
     }
 }

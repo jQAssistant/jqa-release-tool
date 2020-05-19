@@ -40,7 +40,7 @@ public class CheckoutCommand implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments __) {
+    public void run(ApplicationArguments __) throws Exception {
         System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Going to checkout all needed projects", DEFAULT));
 
         try {
@@ -60,7 +60,7 @@ public class CheckoutCommand implements ApplicationRunner {
                    .call();
             }
         } catch (Exception e) {
-            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to close all needed projects.");
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to checkout all needed projects.");
         }
     }
 }

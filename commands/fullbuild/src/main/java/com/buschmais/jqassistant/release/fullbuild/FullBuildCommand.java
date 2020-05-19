@@ -2,6 +2,7 @@ package com.buschmais.jqassistant.release.fullbuild;
 
 import ch.qos.logback.core.pattern.color.ANSIConstants;
 import com.buschmais.jqassistant.release.core.ProjectRepository;
+import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.core.ReleaseConfig;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
 import com.buschmais.jqassistant.release.services.maven.MavenRequest;
@@ -76,8 +77,8 @@ public class FullBuildCommand implements CommandLineRunner {
 
                 mavenService.doRequest(request);
             }
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (Exception e) {
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Release build failed");
         }
     }
 

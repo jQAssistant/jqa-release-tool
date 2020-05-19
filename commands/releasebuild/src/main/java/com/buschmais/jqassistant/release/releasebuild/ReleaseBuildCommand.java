@@ -75,7 +75,7 @@ public class ReleaseBuildCommand implements ApplicationRunner {
                 mavenService.doRequest(request);
             }
         } catch (Exception e) {
-            RTExceptionWrapper.WRAPPER.apply(e, () -> "Release build failed");
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Release build failed");
         }
     }
 

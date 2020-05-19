@@ -49,7 +49,7 @@ public class ShowConfigCommand implements ApplicationRunner {
                 });
             }
         } catch (Exception e) {
-            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to show the configured versions for the release");
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to show the configured versions for the release");
         }
     }
 }

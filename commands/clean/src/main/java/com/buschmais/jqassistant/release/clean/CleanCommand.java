@@ -70,7 +70,7 @@ public class CleanCommand implements ApplicationRunner {
                 mavenService.doRequest(request);
             }
         } catch (Exception e) {
-            RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to clean all Maven builds");
+            throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to clean all Maven builds");
         }
     }
 
