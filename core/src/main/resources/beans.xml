@@ -48,7 +48,7 @@
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-yaml2-plugin">
-        <property name="propertyName" value="jqa-asciidoc-report-plugin.version"/>
+        <property name="propertyName" value="jqa-yaml2-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:yaml2"/>
     </bean>
 
