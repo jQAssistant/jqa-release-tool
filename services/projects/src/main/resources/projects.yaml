@@ -6,7 +6,7 @@ scmurl: git@github.com:jqara/jqa-uber-parent.git
 ---
 order: 10
 id: 'com.buschmais.jqassistant:own-constraints'
-name: jQAssistant Own Rules
+name: jQA Own Rules
 scmurl: git@github.com:jqara/jqa-own-constraints.git
 
 ---
