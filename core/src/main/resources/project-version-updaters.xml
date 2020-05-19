@@ -229,6 +229,13 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
+          id="pro-updater-yaml2-plugin">
+        <property name="id" value="com.buschmais.jqassistant.plugin:yaml2"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="yaml2"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
           id="pro-updater-rdbms-plugin">
         <property name="id" value="com.buschmais.jqassistant.plugin:rdbms"/>
         <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
