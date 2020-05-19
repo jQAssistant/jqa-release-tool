@@ -1,5 +1,7 @@
 package com.buschmais.jqassistant.release.repository;
 
+import com.buschmais.jqassistant.release.core.GitUriTemplate;
+import com.buschmais.jqassistant.release.core.GitUrlTemplateForJQAra;
 import com.buschmais.jqassistant.release.core.ProjectRepository;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,10 @@ class RepositoryProviderServiceTest {
 
     public static String EXPECTED_NAME = "jQA Ueber Parent";
     public static String EXPECTED_URL = "git@github.com:jqara/jqa-uber-parent.git";
+    public static String EXPECTED_URL_TEMPLATE = "git@github.com:{project}/jqa-uber-parent.git";
     public static int EXPECTED_BUILD_ORDER = 0;
+
+    private GitUriTemplate template = new GitUrlTemplateForJQAra();
 
     @Test
     void canLoadListOfJQAProjects() {
@@ -28,7 +33,7 @@ class RepositoryProviderServiceTest {
 
         expected.setBuildOrder(EXPECTED_BUILD_ORDER);
         expected.setName(EXPECTED_NAME);
-        expected.setRepositoryURL(EXPECTED_URL);
+        expected.setRepositoryURL(EXPECTED_URL_TEMPLATE);
 
         var projectRepositories = service.getProjectRepositories();
 
@@ -42,11 +47,12 @@ class RepositoryProviderServiceTest {
     void loadedProjectIsConfiguredProperly() {
 
         var project = service.getProjectRepositories().iterator().next();
+        var effectiveRepoUrl = template.getURI(project.getRepositoryURL());
 
         assertThat(project).isNotNull();
         assertThat(project.getBuildOrder()).isEqualTo(EXPECTED_BUILD_ORDER);
         assertThat(project.getName()).isEqualTo(EXPECTED_NAME);
-        assertThat(project.getRepositoryURL()).isEqualTo(EXPECTED_URL);
+        assertThat(effectiveRepoUrl).isEqualTo(EXPECTED_URL);
     }
 
     @SpringBootApplication

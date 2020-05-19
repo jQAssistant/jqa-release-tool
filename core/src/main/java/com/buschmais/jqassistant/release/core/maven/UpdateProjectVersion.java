@@ -17,14 +17,10 @@ public class UpdateProjectVersion implements VersionUpdate {
 
     public DOMResult update(DOMSource source) throws Exception {
         InputStream xslt = this.getClass().getResourceAsStream("/xsl/update-project-version.xsl");
-
-        //StreamSource source = new StreamSource(sourcePom);
         StreamSource stylesource = new StreamSource(xslt);
-
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer transformer = factory.newTransformer(stylesource);
 
-        // todo System.out.println("\t" + getPropertyName() + " -> " + getNextVersion());
         DOMResult result = new DOMResult();
         transformer.setParameter("version_information", getNextVersion());
         transformer.setParameter("group_id", getGroupId());

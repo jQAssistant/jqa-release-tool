@@ -1,5 +1,7 @@
 package com.buschmais.jqassistant.release.checkout;
 
+import com.buschmais.jqassistant.release.core.GitUriTemplate;
+import com.buschmais.jqassistant.release.core.GitUrlTemplateForJQAra;
 import com.buschmais.jqassistant.release.core.RTExceptionWrapper;
 import com.buschmais.jqassistant.release.repository.RepositoryProviderService;
 import org.eclipse.jgit.api.Git;
@@ -19,10 +21,17 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 @SpringBootApplication(scanBasePackages = "com.buschmais.jqassistant.release")
 public class CheckoutCommand implements ApplicationRunner {
 
+    private GitUriTemplate uriTemplate;
+
     private RepositoryProviderService repositorySrv;
 
     public RepositoryProviderService getRepositorySrv() {
         return repositorySrv;
+    }
+
+    @Autowired
+    public void setUriTemplate(GitUriTemplate uriTemplate) {
+        this.uriTemplate = uriTemplate;
     }
 
     @Autowired
@@ -45,16 +54,15 @@ public class CheckoutCommand implements ApplicationRunner {
 
         try {
             for (var projectRepository : getRepositorySrv().getProjectRepositories()) {
+                var projectUri = uriTemplate.getURI(projectRepository.getRepositoryURL());
                 var s = AnsiOutput.toString(BRIGHT_YELLOW,
                                             "About to checkout Git repository for project ",
                                             BOLD, BRIGHT_YELLOW, "'", projectRepository.getName(), NORMAL, BRIGHT_YELLOW,
-                                            "' from '", BOLD, projectRepository.getRepositoryURL(),
-                                            "'", DEFAULT);
+                                            "' from '", BOLD, projectUri, "'", DEFAULT);
                 System.out.println(s);
 
-
                 Git.cloneRepository()
-                   .setURI(projectRepository.getRepositoryURL())
+                   .setURI(projectUri)
                    .setRemote("gh")
                    .setDirectory(new File(projectRepository.getHumanName()))
                    .call();
