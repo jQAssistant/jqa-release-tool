@@ -55,9 +55,9 @@
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
           id="pro-updater-plugin-parent">
-        <property name="id" value="com.buschmais.jqassistant:jqassistant.plugin.plugin-parent"/>
-        <property name="groupId" value="com.buschmais.jqassistant"/>
-        <property name="artifactId" value="jqassistant.plugin.plugin-parent"/>
+        <property name="id" value="com.buschmais.jqassistant.plugin:parent"/>
+        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
+        <property name="artifactId" value="parent"/>
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
