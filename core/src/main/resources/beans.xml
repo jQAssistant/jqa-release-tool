@@ -121,6 +121,13 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
+          id="jqa-plugin-tycho-it">
+        <!-- For the jQA Maven Plugin required. -->
+        <property name="propertyName" value="it.jqa-tycho-plugin.version"/>
+        <property name="id" value="com.buschmais.jqassistant.plugin:tycho"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-json-plugin">
         <property name="propertyName" value="jqa-json-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:json"/>
