@@ -90,7 +90,7 @@ public class JQAUsagesCommand implements ApplicationRunner {
                        });
                 }
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to show internal jQA dependencies.");
         }
     }

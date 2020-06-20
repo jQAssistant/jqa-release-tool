@@ -80,7 +80,7 @@ public class UpdateToNextDevVersionCommand implements ApplicationRunner {
             var projects = getRepositorySrv().getProjectRepositories();
 
             projects.forEach(this::setReleaseVersions);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to update Maven projects to development release version.");
         }
     }

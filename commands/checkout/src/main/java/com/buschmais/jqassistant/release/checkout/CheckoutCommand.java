@@ -67,7 +67,7 @@ public class CheckoutCommand implements ApplicationRunner {
                    .setDirectory(new File(projectRepository.getHumanName()))
                    .call();
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to checkout all needed projects.");
         }
     }

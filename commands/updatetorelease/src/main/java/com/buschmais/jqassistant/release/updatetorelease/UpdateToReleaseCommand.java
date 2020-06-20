@@ -83,7 +83,7 @@ public class UpdateToReleaseCommand implements ApplicationRunner {
             Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
 
             projects.forEach(this::setReleaseVersions);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to update Maven projects to next release version.");
         }
     }

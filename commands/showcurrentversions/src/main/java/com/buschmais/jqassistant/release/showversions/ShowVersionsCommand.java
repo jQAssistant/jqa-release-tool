@@ -57,7 +57,7 @@ public class ShowVersionsCommand implements ApplicationRunner {
                     System.out.println(line);
                 }
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to show the version of all projects.");
         }
     }

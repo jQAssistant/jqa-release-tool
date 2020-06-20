@@ -68,7 +68,7 @@ public class EraseCommand implements ApplicationRunner {
                          .forEach(File::delete);
                 }
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to delete all project directories");
         }
     }

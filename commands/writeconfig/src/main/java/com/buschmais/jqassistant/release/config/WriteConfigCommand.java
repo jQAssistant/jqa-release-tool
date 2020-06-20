@@ -124,7 +124,7 @@ public class WriteConfigCommand implements ApplicationRunner {
             try (var writer = new FileWriter(config)) {
                 yaml.dump(rc, writer);
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to generate and write " + VERSION_CONFIG_FILE);
         }
 

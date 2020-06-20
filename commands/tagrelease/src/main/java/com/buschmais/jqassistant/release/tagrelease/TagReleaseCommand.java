@@ -78,7 +78,7 @@ public class TagReleaseCommand implements ApplicationRunner {
 
                 System.out.println(msg);
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to tag all projects");
         }
     }

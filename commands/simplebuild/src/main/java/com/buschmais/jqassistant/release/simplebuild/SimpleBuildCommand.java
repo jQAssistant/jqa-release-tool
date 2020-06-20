@@ -74,7 +74,7 @@ public class SimpleBuildCommand implements ApplicationRunner {
                 System.out.println(s);
                 mavenService.doRequest(request);
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to perform a simple build for all projects.");
         }
     }

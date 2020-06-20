@@ -61,7 +61,7 @@ public class PushChangesCommand implements ApplicationRunner {
                                     .setPushTags()
                                     .call();
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to push all changes to " + remote);
         }
     }

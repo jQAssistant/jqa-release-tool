@@ -48,7 +48,7 @@ public class ShowConfigCommand implements ApplicationRunner {
                     System.out.println(line);
                 });
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to show the configured versions for the release");
         }
     }
