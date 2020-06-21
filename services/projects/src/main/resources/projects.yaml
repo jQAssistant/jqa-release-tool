@@ -150,7 +150,7 @@ scmurl: git@github.com:{project}/jqa-graphml-plugin.git
 order: 234
 id: 'com.buschmais.jqassistant.plugin:graphql'
 name: jQA GraphQL Plugin
-scmurl: git@github.com:jqara/jqa-graphql-plugin.git
+scmurl: git@github.com:{project}/jqa-graphql-plugin.git
 
 ---
 order: 240
