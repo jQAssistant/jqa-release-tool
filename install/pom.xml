@@ -24,7 +24,7 @@
                         </goals>
                         <phase>install</phase>
                         <configuration>
-                            <outputDirectory>${user.home}/jqa-release-build</outputDirectory>
+                            <outputDirectory>${user.home}/jqa-release-environment</outputDirectory>
                             <stripVersion>true</stripVersion>
                             <overWriteIfNewer>true</overWriteIfNewer>
                             <overWriteSnapshots>true</overWriteSnapshots>
