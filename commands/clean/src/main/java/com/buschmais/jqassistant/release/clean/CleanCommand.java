@@ -64,7 +64,8 @@ public class CleanCommand implements ApplicationRunner {
                 var request = getMavenRequest(project.getHumanName());
 
                 var s = AnsiOutput.toString(BRIGHT_YELLOW, "About to run a Maven clean for ",
-                                            BOLD, BRIGHT_YELLOW, "'", project.getName(), NORMAL, "'", DEFAULT);
+                                            BOLD, BRIGHT_YELLOW, "'", project.getName(), "'",
+                                            DEFAULT);
                 System.out.println(s);
 
                 mavenService.doRequest(request);

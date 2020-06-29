@@ -1,0 +1,269 @@
+= How-to manual for Releasing jQAssistant
+
+This document describes which prerequisites must be given to be needed to
+be able to make an release of jQAssistant and how to perform an official
+release of jQAssistant.
+
+== Prerequisites for a Release
+
+* Personal Github account
+* Right to push changes to the jQAssistant repositories at jQAssistant
+  hosted at https://github.com/jqassistant
+* Account as producer at https://central.sonatype.org/[OSSRH Sonatype^].
+  - If you are not familiar with pubslishing Maven artifacts to Maven Central,
+  please read the https://central.sonatype.org/pages/producers.html[documentation on OSSRH^]
+  before.
+  - It is not need to claim new coordinates for jQAssistant. The groupId
+    `com.buschmais.jqassistant` has been already reserved for jQAssistant.
+  - Ask one of the current jQAssistant development team members to help
+    you to get the permission to staging repository of jQAssistant, so that
+    you will be able to see and to release the artifacts uploaded during
+    the release process to OSSRH.
+* GPG key to sign the artifacts generated during the release build process.
+  If you do not have already a GPG key, read the article
+  https://central.sonatype.org/pages/working-with-pgp-signatures.html[Working with PGP Signatures^]
+  on the OSSRH site.
+* A current Java JDK 10 installation
+* A current Java JDK 1.8 installtion
+* A current Maven 3.6.x or higher installation
+
+== Known Problems
+
+* In cases of releated SSH problems, check `~/.ssh/config` first. The used libraries
+  cannot handle the latest format configuration format features supported
+  by OpenSSH.
+
+== Thinks to keep in Mind
+
+* Read the hole guide before starting your first release.
+* Read the guide again in cases you skipped the first point in this list. 😉
+* Pay attention to the output of the tools. The output might contain valuable
+  information for you.
+* You can nearly always abort the release process until you have released
+  the Maven artifacts of the release at OSSRH.
+
+== Performing a Release
+
+A jQAssistant release is done with the help of a set of commandline utilities,
+where each of them is responsible for a specific action during the release
+process.
+
+== Building the release tool
+
+Clone the release tooling for jQAssistant from Github at https://github.com/jQAssistant/jqa-release-tool
+and build it via Maven.
+
+----
+$ git clone git@github.com:jQAssistant/jqa-release-tool.git
+$ cd jqa-release-tool
+$ mvn clean install
+----
+
+After the build, you will find a directory called `jqa-release-environment` in your homedirectory
+with a bunch of executable jars.
+
+== Prepare the release process
+
+Currently, the release tooling requires a JDK 1.8 for building jQAssistant
+and JDK 10 to run the build tools.
+
+Set the environment variables `RT_JAVA_HOME` and `RT_MAVEN_HOME` to the
+installation directory of the JDK 1.8 and the Maven installation you would like
+to use during the release process. The release tooling uses these environment
+variables to find Maven and the JDK internally used for the build process.
+
+----
+$ export RT_JAVA=/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk//Contents/Home
+$ export RT_MAVEN=/opt/tooling/apache-maven-3.6.2
+----
+
+Then check which version you use for running the release tools. It should be
+a current JDK 10.
+
+----
+$ java -version
+java version "10" 2018-03-20
+Java(TM) SE Runtime Environment 18.3 (build 10+45)
+Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10+45, mixed mode)
+----
+
+Change to the release directory and perform the checkout of all needed Git repositories
+by running the `checkout.jar`. `checkout.jar` comes with a preconfigured list
+of the required Git repositories.
+
+----
+$ cd ~/jqa-release-environment
+$ ./checkout.jar --hot
+----
+
+[IMPORTANT]
+Without the option `--hot`, running `checkout.jar` will clone the mirrored
+repositories with patched Marven coordinates from the Github organisation
+https://github.com/jqara/[jqara^].
+
+[TIP]
+The mirrored and patched jQAssistant repositorries at
+https://github.com/jqara/[jqara^] provides a kind of sandbox to learn
+how to use the release tools in a save environment.
+
+The next step is to create and afterwards to edit the configuration files for the
+release process needed.
+
+----
+$ ./writeconfig.jar
+Writing configuration files
+Wrote Maven settings file 'maven-settings.xml'
+Enter your credentials for the deployment to OSS Sonatype in this file.
+
+Wrote configuration file 'gpg.properties'
+Enter your GPG key and passphrase in this file.
+
+Wrote version configuration file 'rconfig.yaml'
+Check the computed version information and change them if needed.
+
+Use the command showconfig to display the effective configuration.
+----
+
+This step generated three files in the current directory:
+
+`maven-settings.xml` :: Maven settings file used by Maven during the release,
+mainly needed to specify the credentials needed to upload artifacts
+to OSSRH via Maven.
+`gpg.properties` :: Properties file to specify the id of the GPG key to be used
+to sign the generated artifacts and the passphrase of the key.
+`rcconfig.yaml` :: Version configuration, used to specify the release version
+identifier of the version to release and the version identifier of the next
+development version.
+
+Add  your OSSRH credentials to `maven-settings.xml` and the required information
+on you GPG key to `gpg.properties`.
+
+=== Setting the version configuration
+
+The `rconfig.yaml` allows you the set the version identifier for the release
+you are going to build and the version identifier for the subsequent
+development version. Currently this version information must be set for
+each subproject of jQAssistant.
+
+Open `rconfig.yaml` and set the field `nextVersion` to the version identifier
+for the next development version and the field `releaseVersion` to the version
+identifier of the release to build.
+
+You can validate your configuration by running `showconfig.jar`. It shows
+you the current version identifier of each project, the version identifier
+of the upcomming release and the version identifier of the subsequent
+development version. You can run `showconfig.jar` at any time to check the
+configuration. To display the actual version given in the POM of each
+subproject, run the command `showversions.jar`.
+
+=== Perform the release
+
+Start with the command `simplebuild.jar`. It starts a normal Maven build
+for each subproject and allows you to check if you can build the project at
+all. As of June 2020, a simple build does not execute any tests, nor it
+runs the selfanalysis done by jQAssistant.
+
+----
+$ ./simplebuild.jar
+----
+
+After an successful build, you can run `clean.jar`. It removes all
+build artifacts by performing a call to `mvn clean` for each subproject.
+
+After cleaning the build, changing the version of each project to the
+release version identifier is the next step. It can be done by
+running `updatetorelease.jar`. Calling `showversions.jar` can be used
+to check the result of the update.
+
+----
+$ ./updatetorelease.jar
+$ ./showversions.jar
+----
+
+The next step is to commit the changes made to each subproject and to set
+the tag for the release. The changes made will not be pushed to the upstream
+repository right now. This will be done at the end, after the successful
+release of all build artifacts of jQAssistant via OSSRH Sonatype. Not
+pushing the changes immediately allows to discard them if any problem
+occurs during the release of jQAssistant at OSSRH Sonatype.
+
+First the commit message for committing the changes must be provided
+in a text file, which will be used as argument to `commitchanges.jar`.
+The tag for the release will be set by `tagrelease.jar`.
+
+----
+$ echo "Release <version identifier>" > /tmp/release.txt
+$ ./commitchanges --message=/tmp/release.txt
+$ ./tagrelease.jar
+----
+
+The actual release build will be done my running the `releasebuild.jar`
+command.
+
+----
+$ ./releasebuild.jar
+----
+
+During the build of the release all artifacts belonging to a jQA release
+will be build, signed with the provided GPG key and uploaded to OSSRH
+Sonatype.
+
+=== Validating the uploaded Artifacts at Sonatype
+
+All build artifacts have been uploaded to the staging repository of
+jQAssistant at OSSRH Sonatype. The next step is to close the staging
+repository and to start the validation of all uploaded artifacts.
+
+If the validation fails, the staging repository must be dropped and
+all changes done locally to the Git checkouts of the subprojects must be
+discarded. The best way to do that is by running the command `erase.jar`.
+
+In the other case, go back to your local machine without releasing the
+staged artifacts at the moment.
+
+=== Setting the next Development Version
+
+The next step is to move the version of each artifact to the next
+development version `updatetonextdevversion.jar`
+and to check the result of this step via `showversion.jar`.
+
+----
+$ ./updatetonextdevversion.jar
+$ ./showversions.jar
+----
+
+Again a commit message mus be provided, before the changes can be make
+permanent via `commitchanges.jar`.
+
+----
+$ echo "Going bach to development" > /tmp/development.txt
+$ ./commitchanges.jar --message=/tmp/development.txt
+----
+
+=== Pushing the Changes and Releasing the build Version
+
+The last step is to push the changes to the upstream repositories
+and to release the build version via OSSRH Sonatype. The later
+should be only done if pushing the changes was successful.
+
+Doing this in this order is the only way to ensure that Git history
+of each subproject reflects the result of the release.
+
+----
+$ ./pushchanges.jar
+----
+
+=== Cleaning up
+
+After a each release, the release build directory should be deleted,
+as the configuration files created and used during the whole process
+contains sensitive credentials.
+
+----
+$ cd $HOME
+$ rm -r -f jqa-release-environment
+----
+
+=== Futher Reading
+
+* link:./tooling.adoc[Release Tooling Overview]

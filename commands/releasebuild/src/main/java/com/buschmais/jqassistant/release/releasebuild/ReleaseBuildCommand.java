@@ -69,7 +69,7 @@ public class ReleaseBuildCommand implements ApplicationRunner {
                                                "About to run a release Maven build for ",
                                                BOLD, BRIGHT_YELLOW, "'",
                                                project.getName(),
-                                               NORMAL, "'", DEFAULT);
+                                               "'", DEFAULT);
                 System.out.println(s);
 
                 mavenService.doRequest(request);

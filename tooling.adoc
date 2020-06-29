@@ -1,0 +1,81 @@
+= Release Tooling Overview
+
+
+|===
+| Tool | Purpose | Options
+
+| `checkout.jar`
+| Clones all sub-projects required for a building a release.
+| `--hot` to clone the original upstream repositories from
+  from the jQAssistant organisation at Github. If not given,
+  the repositories are take from the sandbox organisation
+  https://github.com/jqara/[jqara^]
+  at Github
+
+| `clean.jar`
+| Performas a `mvn clean` for each project checked out.
+|
+
+| `commitchanges.jar`
+| Commits the changes done to each project checked out with
+  a given commit message.
+| `--message=<file_with_commitmsg>`
+
+| `erase.jar`
+| Deletes each project checked out.
+| Removes all Git repositories cloned by `checkout.jar``
+
+| `fullbuild.jar`
+| Performs a full build without uploading anything to OSSRH Sonatype.
+|
+
+| `jqausages.jar`
+| Not finished yet.
+|
+
+| `pushchanges.jar`
+| Pushes all changes done to the index of the project to
+  the upstream repository.
+|
+
+| `releasebuild.jar`
+| Performs a build and uploads all build artifacts to OSSRH Sonatype.
+|
+
+| `showconfig.jar`
+| Shows the versions configured in  `rconfig.yaml` for each sub-project.
+|
+
+| `showversions.jar`
+| Displays the currently set version information for
+  each project checked out.
+|
+
+| `simplebuild.jar`
+| Performs a simple build.
+|
+
+| `tagrelease.jar`
+| Sets a tag with the release version identifier in each
+  checked out sub-project.
+|
+
+| `updatetonextdevversion.jar`
+| Sets the version identifier of each project checked out
+  to the configured next development version. The changes are
+  done one to the working directoy and not staged or
+  committed to the local repository.
+|
+
+| `updatetorelease.jar`
+| Sets the version identifier of each project checked out
+  to the configured release version. The changes are
+  done one to the working directoy and not staged or
+  committed to the local repository.
+|
+
+| `writeconfig.jar`
+| Generated the configuration files needed to perfom a release.
+|
+
+|===

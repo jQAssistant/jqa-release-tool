@@ -57,7 +57,7 @@ public class EraseCommand implements ApplicationRunner {
                 var humanName = repository.getHumanName();
                 var projectDirectory = new File(humanName);
 
-                String s = AnsiOutput.toString(BRIGHT_YELLOW, "Deleting repository ", BOLD, BRIGHT_YELLOW, "'",
+                String s = AnsiOutput.toString(BRIGHT_YELLOW, "Deleting repository '", BOLD, BRIGHT_YELLOW,
                                                projectDirectory.getName(), NORMAL, "'", DEFAULT);
                 System.out.println(s);
 

@@ -88,12 +88,10 @@ public class UpdateToNextDevVersionCommand implements ApplicationRunner {
     private void setReleaseVersions(ProjectRepository projectRepository) {
         var backuper = new POMFileBackuper(BACKUP_EXTENSION);
 
-        var s = AnsiOutput.toString(BRIGHT_YELLOW,
-                                    "About to update version information of ",
-                                    BOLD, BRIGHT_YELLOW, "'",
-                                    projectRepository.getName(),
-                                    NORMAL, BRIGHT_YELLOW,
-                                    "' to the next dev version.", DEFAULT);
+        var s = AnsiOutput.toString(BRIGHT_YELLOW, "About to update version information of '",
+                                    BOLD, BRIGHT_YELLOW, projectRepository.getName(),
+                                    NORMAL, BRIGHT_YELLOW, "' to the next dev version.",
+                                    DEFAULT);
         System.out.println(s);
 
         var directory = projectRepository.getHumanName();

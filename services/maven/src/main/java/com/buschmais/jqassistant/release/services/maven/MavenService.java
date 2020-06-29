@@ -76,12 +76,12 @@ public class MavenService {
 
             if (0 != result.getExitCode()) {
                 bl.stop();
-                var s = AnsiOutput.toString(BRIGHT_RED, "Maven build failed for ", BOLD, BRIGHT_RED, "'",
+                var s = AnsiOutput.toString(BRIGHT_RED, "Maven build failed for '", BOLD, BRIGHT_RED,
                                             request.getWorkingDir(), NORMAL, "'", AnsiColor.DEFAULT);
 
                 System.out.println(s);
 
-                s = AnsiOutput.toString(BRIGHT_RED, "Check the log file at ", BOLD, BRIGHT_RED, "'",
+                s = AnsiOutput.toString(BRIGHT_RED, "Check the log file at '", BOLD, BRIGHT_RED,
                                         log.toString(), NORMAL, "'", AnsiColor.DEFAULT);
 
                 System.out.println(s);

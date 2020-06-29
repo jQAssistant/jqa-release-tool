@@ -49,8 +49,6 @@ public class CommitChangesCommand implements ApplicationRunner {
         var messageFile = getFile(arguments);
         var message = readMessageFromFile(messageFile);
 
-        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Going to checkout all needed projects", DEFAULT));
-
         System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Commiting all local changes", DEFAULT));
 
         try {
@@ -59,7 +57,7 @@ public class CommitChangesCommand implements ApplicationRunner {
                                                "Commiting changes in ",
                                                BOLD, AnsiColor.BRIGHT_YELLOW, "'",
                                                projectRepository.getHumanName(),
-                                               NORMAL, "'", AnsiColor.DEFAULT);
+                                               "'", AnsiColor.DEFAULT);
                 System.out.println(s);
 
                 Git.open(new File(projectRepository.getHumanName()))

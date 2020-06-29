@@ -56,9 +56,10 @@ public class CheckoutCommand implements ApplicationRunner {
             for (var projectRepository : getRepositorySrv().getProjectRepositories()) {
                 var projectUri = uriTemplate.getURI(projectRepository.getRepositoryURL());
                 var s = AnsiOutput.toString(BRIGHT_YELLOW,
-                                            "About to checkout Git repository for project ",
-                                            BOLD, BRIGHT_YELLOW, "'", projectRepository.getName(), NORMAL, BRIGHT_YELLOW,
-                                            "' from '", BOLD, projectUri, "'", DEFAULT);
+                                            "About to checkout Git repository for project '",
+                                            BOLD, projectRepository.getName(), NORMAL, BRIGHT_YELLOW,
+                                            "' from '", BOLD, projectUri, NORMAL,
+                                            BRIGHT_YELLOW, "'", DEFAULT);
                 System.out.println(s);
 
                 Git.cloneRepository()

@@ -48,10 +48,12 @@ public class PushChangesCommand implements ApplicationRunner {
 
         try {
             for (var repository : getRepositorySrv().getProjectRepositories()) {
-                var s = AnsiOutput.toString(BRIGHT_YELLOW, "Pushing changes of ",
-                                            BOLD, BRIGHT_YELLOW, "'", repository.getName(),
-                                            NORMAL, BRIGHT_YELLOW, "' to '", BOLD, remote, NORMAL,
-                                            "'", AnsiColor.DEFAULT);
+                var s = AnsiOutput.toString(BRIGHT_YELLOW, "Pushing changes of '",
+                                            BOLD, repository.getName(),
+                                            NORMAL, BRIGHT_YELLOW, "' to '",
+                                            BOLD, remote,
+                                            NORMAL, BRIGHT_YELLOW, "'",
+                                            DEFAULT);
 
                 System.out.println(s);
 

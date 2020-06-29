@@ -23,6 +23,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import static org.springframework.boot.ansi.AnsiColor.*;
+import static org.springframework.boot.ansi.AnsiColor.BRIGHT_YELLOW;
+import static org.springframework.boot.ansi.AnsiColor.DEFAULT;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
 import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
@@ -60,17 +63,16 @@ public class SimpleBuildCommand implements ApplicationRunner {
     public void run(ApplicationArguments __) throws Exception {
         Set<ProjectRepository> projects = getRepositorySrv().getProjectRepositories();
 
-        System.out.println(AnsiOutput.toString(AnsiColor.BRIGHT_GREEN, "Building jQA without any tests execution and " +
-            "without a run of jQAssistant", AnsiColor.DEFAULT));
+        System.out.println(AnsiOutput.toString(BRIGHT_GREEN, "Building jQA without any tests execution and " +
+                                                             "without a run of jQAssistant", DEFAULT));
 
         try {
             for (ProjectRepository p : projects) {
                 MavenRequest request = getMavenRequest(p.getHumanName());
-                String s = AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW,
-                                               "About to run a simple Maven build for ",
-                                               BOLD, AnsiColor.BRIGHT_YELLOW, "'",
-                                               p.getName(),
-                                               NORMAL, "'", AnsiColor.DEFAULT);
+                String s = AnsiOutput.toString(BRIGHT_YELLOW, "About to run a simple Maven build for '",
+                                               BOLD, BRIGHT_YELLOW, p.getName(),
+                                               NORMAL, BRIGHT_YELLOW, "'",
+                                               DEFAULT);
                 System.out.println(s);
                 mavenService.doRequest(request);
             }

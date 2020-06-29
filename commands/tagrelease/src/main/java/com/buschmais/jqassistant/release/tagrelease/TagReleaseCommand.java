@@ -71,10 +71,11 @@ public class TagReleaseCommand implements ApplicationRunner {
                    .setName(tagName).setMessage("Release of " + releaseConfig.name + " " + releaseConfig.releaseVersion)
                    .call();
 
-                var msg = AnsiOutput.toString(BRIGHT_YELLOW, "Tagged ", BOLD, BRIGHT_YELLOW, "'",
-                                              projectRepository.getName(),
-                                              NORMAL, BRIGHT_YELLOW, " with tag ", BOLD, BRIGHT_YELLOW, "'",
-                                              tagName, NORMAL, "'", DEFAULT);
+                var msg = AnsiOutput.toString(BRIGHT_YELLOW, "Tagged '",
+                                              BOLD, BRIGHT_YELLOW, projectRepository.getName(),
+                                              NORMAL, BRIGHT_YELLOW, "' with tag '",
+                                              BOLD, BRIGHT_YELLOW, tagName,
+                                              NORMAL, BRIGHT_WHITE, "'", DEFAULT);
 
                 System.out.println(msg);
             }

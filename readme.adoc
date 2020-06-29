@@ -1,14 +1,14 @@
 = jQAssistant Release Tool
 
-In progress.
+This repository contains the tools, used to build a offical release of
+https://jqsasistant.org[jQAssistant^].
 
-== Required Environment Variables
+== Available Documentation
 
-The following environment variables must be set in order to run
-the release tooling properly.
+Currently the following documents on releasing jQAssistant are available
 
-`RT_MAVEN_HOME`:: Installation directory of the Maven installation to be used.
-`RT_JAVA_HOME`:: Installation directory of the JDK installation to be used.
+* link:howto-build-a-release.asciidoc[How-to manual for Releasing jQAssistant]
+* link:tooling.adoc[Release Tooling Overview^]
 
 
 

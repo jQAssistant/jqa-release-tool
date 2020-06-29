@@ -53,7 +53,7 @@ public class ShowVersionsCommand implements ApplicationRunner {
                 try (var fis = new FileInputStream(path)) {
                     var reader = new MavenXpp3Reader();
                     var model = reader.read(fis);
-                    var line = format("%-40s\t%s", model.getName(), model.getVersion());
+                    var line = format("%-40s : %-10s", model.getName(), model.getVersion());
                     System.out.println(line);
                 }
             }

@@ -94,9 +94,9 @@ public class UpdateToReleaseCommand implements ApplicationRunner {
         String s = AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW,
                                        "About to update version information of ",
                                        BOLD, AnsiColor.BRIGHT_YELLOW, "'",
-                                       projectRepository.getName(),
-                                       NORMAL, AnsiColor.BRIGHT_YELLOW,
-                                       "' to the next release.", DEFAULT);
+                                       projectRepository.getName(), ", ",
+                                       AnsiColor.BRIGHT_YELLOW, NORMAL,
+                                       "to the next release.", DEFAULT);
         System.out.println(s);
         String directory = projectRepository.getHumanName();
         backuper.makeBackUpOfPom(directory);

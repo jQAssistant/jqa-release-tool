@@ -60,8 +60,10 @@ public class JQAUsagesCommand implements ApplicationRunner {
 
         try {
             for (ProjectRepository p : projects) {
-                var line = AnsiOutput.toString(BRIGHT_YELLOW, "About to run analyse dependencies of ", BOLD,
-                                               BRIGHT_YELLOW, "'", p.getName(), NORMAL, "'", DEFAULT);
+                var line = AnsiOutput.toString(BRIGHT_YELLOW, "About to run analyse dependencies of '",
+                                               BOLD, p.getName(),
+                                               NORMAL, BRIGHT_YELLOW, "'",
+                                               DEFAULT);
                 System.out.println(line);
 
                 var pomPath = p.getHumanName() + "/pom.xml";

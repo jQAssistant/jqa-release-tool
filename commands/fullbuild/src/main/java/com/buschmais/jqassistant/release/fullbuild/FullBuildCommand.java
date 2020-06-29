@@ -70,7 +70,7 @@ public class FullBuildCommand implements CommandLineRunner {
                                                "About to run a full Maven build for ",
                                                BOLD, AnsiColor.BRIGHT_YELLOW, "'",
                                                p.getName(),
-                                               NORMAL, "'", AnsiColor.DEFAULT);
+                                               "'", AnsiColor.DEFAULT);
                 System.out.println(s);
 
 
