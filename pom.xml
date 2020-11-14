@@ -19,31 +19,62 @@
         <url>http://www.buschmais.com</url>
     </organization>
 
+    <properties>
+        <!--
+         ! Maven related configuration properties
+         !-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!--
+         ! Version information for Maven plugins
+         !-->
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-dependency-plugin.version>${maven-clean-plugin.version}</maven-dependency-plugin.version>
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+        <maven-enforcer-plugin.version>${maven-install-plugin.version}</maven-enforcer-plugin.version>
+        <maven-install-plugin.version>${maven-deploy-plugin.version}</maven-install-plugin.version>
+        <maven-invoker.version>2.2</maven-invoker.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
+        <maven-resources-plugin.version>${maven-jar-plugin.version}</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+
+        <!--
+         ! Project dependencies and dependencies of the plugins
+         !-->
+
+        <asm.version>9.0</asm.version>
+        <assertj.version>3.18.1</assertj.version>
+        <logback.version>1.2.2</logback.version>
+        <javax-annotation-api.version>1.3.2</javax-annotation-api.version>
+
+        <!--
+         ! Funktioniert nicht mehr mit 5.8.0.202006091008-r
+         !-->
+        <jgit.version>5.7.0.202003110725-r</jgit.version>
+        <junit5.version>5.2.0</junit5.version>
+        <maven-release-manager.version>3.0.0-M1</maven-release-manager.version>
+        <maven.version>3.6.3</maven.version>
+        <snakeyaml.version>1.27</snakeyaml.version>
+
+        <!--
+         ! Upgrading to a version higher then 2.2.1 causes Spring Boot to
+         ! fail with a java.lang.reflect.MalformedParameterizedTypeException
+         ! Oliver B. Fischer, 2020-11-14
+         ! See
+         !-->
+        <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+    </properties>
+
+
     <licenses>
         <license>
             <name>GNU General Public License, v3</name>
             <url>http://www.gnu.org/licenses/gpl-3.0.html</url>
         </license>
     </licenses>
-
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <assertj.version>3.9.1</assertj.version>
-        <asm.version>6.1.1</asm.version>
-        <logback.version>1.2.2</logback.version>
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <maven-dependency-plugin.version>3.1.0</maven-dependency-plugin.version>
-        <maven-enforcer-plugin.version>3.0.0-M1</maven-enforcer-plugin.version>
-        <javax-annotation-api.version>1.3.2</javax-annotation-api.version>
-        <jgit.version>5.0.1.201806211838-r</jgit.version>
-        <junit5.version>5.2.0</junit5.version>
-        <snakeyaml.version>1.21</snakeyaml.version>
-        <spring-boot.version>2.0.4.RELEASE</spring-boot.version>
-        <maven.version>3.5.3</maven.version>
-    </properties>
 
 
     <build>
@@ -55,20 +86,16 @@
                     <version>${maven-dependency-plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.21.0</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.junit.platform</groupId>
-                            <artifactId>junit-platform-surefire-provider</artifactId>
-                            <version>1.2.0</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.junit.jupiter</groupId>
-                            <artifactId>junit-jupiter-engine</artifactId>
-                            <version>${junit5.version}</version>
-                        </dependency>
-                    </dependencies>
+                    <version>${maven-surefire-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
@@ -84,6 +111,45 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>10</source>
+                        <target>10</target>
+                        <release>10</release>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <!--
+                             ! Enables the compiler to compile Java 10 code
+                             !-->
+                            <groupId>org.ow2.asm</groupId>
+                            <artifactId>asm</artifactId>
+                            <version>${asm.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -111,26 +177,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>10</source>
-                    <target>10</target>
-                    <release>10</release>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <!--
-                         ! Enables the compiler to compile Java 10 code
-                         !-->
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>${asm.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
         </plugins>
     </build>
 
@@ -143,6 +189,26 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.maven.release</groupId>
+                <artifactId>maven-release-manager</artifactId>
+                <version>${maven-release-manager.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-providers-standard</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.shared</groupId>
+                <artifactId>maven-invoker</artifactId>
+                <version>${maven-invoker.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-artifact</artifactId>

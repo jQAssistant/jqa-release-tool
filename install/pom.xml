@@ -29,6 +29,7 @@
                             <overWriteIfNewer>true</overWriteIfNewer>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <overWriteReleases>true</overWriteReleases>
+                            <excludeTransitive>true</excludeTransitive>
                         </configuration>
                     </execution>
                 </executions>
