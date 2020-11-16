@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * improves the testability of the release tooling.
  */
 @Component
-public class Environment {
+public class ReleaseEnvironment {
     public boolean isVariableSet(CharSequence variableName) {
         return System.getenv().containsKey(variableName);
     }

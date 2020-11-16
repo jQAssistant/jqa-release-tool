@@ -1,6 +1,6 @@
 package com.buschmais.jqassistant.release.services.maven;
 
-import com.buschmais.jqassistant.release.core.Environment;
+import com.buschmais.jqassistant.release.core.ReleaseEnvironment;
 import com.buschmais.jqassistant.release.core.RTException;
 import org.apache.maven.shared.invoker.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 @Service
 public class MavenService {
 
-    private com.buschmais.jqassistant.release.core.Environment environment;
+    private com.buschmais.jqassistant.release.core.ReleaseEnvironment environment;
 
-    public Environment getEnvironment() {
+    public ReleaseEnvironment getEnvironment() {
         return environment;
     }
 
     @Autowired
-    public void setEnvironment(Environment environment) {
+    public void setEnvironment(ReleaseEnvironment environment) {
         this.environment = environment;
     }
 
