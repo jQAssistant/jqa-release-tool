@@ -73,8 +73,8 @@ to use during the release process. The release tooling uses these environment
 variables to find Maven and the JDK internally used for the build process.
 
 ----
-$ export RT_JAVA=/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk//Contents/Home
-$ export RT_MAVEN=/opt/tooling/apache-maven-3.6.2
+$ export RT_JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home
+$ export RT_MAVEN_HOME=/opt/tooling/apache-maven-3.6.2
 ----
 
 Then check which version you use for running the release tools. It should be
