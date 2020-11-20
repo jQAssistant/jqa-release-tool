@@ -78,13 +78,13 @@ $ export RT_MAVEN_HOME=/opt/tooling/apache-maven-3.6.2
 ----
 
 Then check which version you use for running the release tools. It should be
-a current JDK 10.
+a current JDK 15.
 
 ----
 $ java -version
-java version "10" 2018-03-20
-Java(TM) SE Runtime Environment 18.3 (build 10+45)
-Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10+45, mixed mode)
+java version "15.0.1" 2020-10-20
+Java(TM) SE Runtime Environment (build 15.0.1+9-18)
+Java HotSpot(TM) 64-Bit Server VM (build 15.0.1+9-18, mixed mode, sharing)
 ----
 
 Change to the release directory and perform the checkout of all needed Git repositories

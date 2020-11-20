@@ -170,7 +170,7 @@
                                     <version>[3.5.2,)</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>[10,12]</version>
+                                    <version>[15,)</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
