@@ -208,6 +208,24 @@ During the build of the release all artifacts belonging to a jQA release
 will be build, signed with the provided GPG key and uploaded to OSSRH
 Sonatype.
 
+=== Validating the correct usage of internal Dependecies
+
+The release tooling offers also the `jqausages.jar` command. It lists
+the internal jQAssistant dependencies for ech subproject. This is quite
+usefull if you would like to check if the update of the version information
+done by `updatetorelease.jar` and `updatetonextdevversion.jar` didn't
+miss any internal jQAssistant dependency.
+
+While `updatetorelease.jar` and `updatetonextdevversion.jar` use the POM file
+of each project in the corresponding local Git repositories,
+`jqausages.jar` also takes information from the build artifacts in
+the local Maven repository. Hence you must run a complete build via
+`simplebuild.jar` or `releasebuild.jar`, before you can use this command.
+
+----
+$ ./jqausages.jar
+----
+
 === Validating the uploaded Artifacts at Sonatype
 
 All build artifacts have been uploaded to the staging repository of

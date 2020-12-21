@@ -57,6 +57,7 @@
         <junit5.version>5.2.0</junit5.version>
         <maven-release-manager.version>3.0.0-M1</maven-release-manager.version>
         <maven.version>3.6.3</maven.version>
+        <shrinkwrap-resolver.version>3.1.4</shrinkwrap-resolver.version>
         <snakeyaml.version>1.27</snakeyaml.version>
 
         <!--
@@ -66,6 +67,7 @@
          ! See
          !-->
         <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+        <streamex.version>0.7.3</streamex.version>
     </properties>
 
 
@@ -190,6 +192,28 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-depchain</artifactId>
+                <version>${shrinkwrap-resolver.version}</version>
+                <scope>compile</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+                <version>${shrinkwrap-resolver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-api-maven</artifactId>
+                <version>${shrinkwrap-resolver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>one.util</groupId>
+                <artifactId>streamex</artifactId>
+                <version>${streamex.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.maven.release</groupId>
                 <artifactId>maven-release-manager</artifactId>
                 <version>${maven-release-manager.version}</version>
@@ -262,25 +286,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <!--
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-
-
-
-
-        <dependency>
-            <groupId>org.xmlbeam</groupId>
-            <artifactId>xmlprojector</artifactId>
-            <version>1.4.14</version>
-        </dependency>
-        -->
-    </dependencies>
-
 
 </project>

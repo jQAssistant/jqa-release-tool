@@ -11,7 +11,7 @@
         </server>
     </servers>
 
-    <localRepository>/Users/plexus/jqa-rel-tools/maven-local-repo</localRepository>
+    <localRepository>${user.home}/jqa-release-environment/maven-local-repo</localRepository>
  <profiles>
      <profile>
          <id>disable-sonatype</id>

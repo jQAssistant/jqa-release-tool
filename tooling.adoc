@@ -30,7 +30,8 @@
 |
 
 | `jqausages.jar`
-| Not finished yet.
+| Displays the version information of all internal jQAssistant
+  dependencies of each sub-project configured in `rconfig.yaml`.
 |
 
 | `pushchanges.jar`
