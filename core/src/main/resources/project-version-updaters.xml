@@ -138,13 +138,6 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
-          id="pro-updater-java8-plugin">
-        <property name="id" value="com.buschmais.jqassistant.plugin:java8"/>
-        <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
-        <property name="artifactId" value="java8"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
           id="pro-updater-javaee6-plugin">
         <property name="id" value="com.buschmais.jqassistant.plugin:javaee6"/>
         <property name="groupId" value="com.buschmais.jqassistant.plugin"/>

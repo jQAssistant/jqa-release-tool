@@ -96,12 +96,6 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
-          id="jqa-java8-plugin">
-        <property name="propertyName" value="jqa-java8-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:java8"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-cdi-plugin">
         <property name="propertyName" value="jqa-cdi-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:cdi"/>

@@ -58,24 +58,18 @@ scmurl: git@github.com:{project}/jqa-java-plugin.git
 ###
 ---
 order: 100
-id: 'com.buschmais.jqassistant.plugin:java8'
-name: jQA Java 8 Plugin
-scmurl: git@github.com:{project}/jqa-java8-plugin.git
-###
----
-order: 110
 id: 'com.buschmais.jqassistant.plugin:json'
 name: jQA JSON Plugin
 scmurl: git@github.com:{project}/jqa-json-plugin.git
 ###
 ---
-order: 120
+order: 110
 id: 'com.buschmais.jqassistant.plugin:yaml'
 name: jQA YAML Plugin
 scmurl: git@github.com:{project}/jqa-yaml-plugin.git
 ###
 ---
-order: 122
+order: 120
 id: 'com.buschmais.jqassistant.plugin:yaml2'
 name: jQA YAML 2 Plugin
 scmurl: git@github.com:{project}/jqa-yaml2-plugin.git
