@@ -49,17 +49,12 @@ public class WriteConfigCommand implements ApplicationRunner {
     }
 
     public void makeLocalCopyOfMavenSettings() throws Exception {
-        // TODO: 23.06.18 class path resource verwenden
         InputStream is = WriteConfigCommand.class.getResourceAsStream("/settings.xml");
 
         File of = new File(MAVEN_SETTING_FILE);
 
         try (FileOutputStream fos = new FileOutputStream(of)) {
-            byte[] buffer = new byte[8 * 1024];
-            int bytesRead;
-            while ((bytesRead = is.read(buffer)) != -1) {
-                fos.write(buffer, 0, bytesRead);
-            }
+            is.transferTo(fos);
         } catch (IOException e) {
             throw RTExceptionWrapper.WRAPPER.apply(e, () -> "Failed to write " + MAVEN_SETTING_FILE);
         }
