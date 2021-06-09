@@ -29,7 +29,7 @@ release of jQAssistant.
 
 == Known Problems
 
-* In cases of releated SSH problems, check `~/.ssh/config` first. The used libraries
+* In case of related SSH problems, check `~/.ssh/config` first. The used libraries
   cannot handle the latest format configuration format features supported
   by OpenSSH.
 
