@@ -112,5 +112,10 @@
             <artifactId>tagrelease</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.buschmais.jqassistant.release.commands</groupId>
+            <artifactId>reset</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

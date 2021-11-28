@@ -43,6 +43,10 @@
 | Performs a build and uploads all build artifacts to OSSRH Sonatype.
 |
 
+| `reset.jar`
+| Resets all changes done to the local repositories.
+|
+
 | `showconfig.jar`
 | Shows the versions configured in  `rconfig.yaml` for each sub-project.
 |

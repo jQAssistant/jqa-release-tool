@@ -30,6 +30,7 @@
         <module>commitchanges</module>
         <module>pushchanges</module>
         <module>tagrelease</module>
+        <module>reset</module>
     </modules>
 
 
