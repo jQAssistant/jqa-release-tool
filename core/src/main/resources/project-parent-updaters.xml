@@ -12,49 +12,49 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParentVersion"
           id="parent-updater-coreframework">
         <property name="id" value="com.buschmais.jqassistant.core:parent"/>
         <property name="groupId" value="com.buschmais.jqassistant.core"/>
         <property name="artifactId" value="parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParentVersion"
           id="parent-updater-own-constraints">
         <property name="id" value="com.buschmais.jqassistant:own-constraints"/>
         <property name="groupId" value="com.buschmais.jqassistant"/>
         <property name="artifactId" value="own-constraints"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParentVersion"
           id="parent-updater-plugin-parent">
         <property name="id" value="com.buschmais.jqassistant.plugin:parent"/>
         <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
         <property name="artifactId" value="parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParentVersion"
           id="parent-updater-ueber-parent">
         <property name="id" value="com.buschmais.jqassistant:jqa-uber-parent"/>
         <property name="groupId" value="com.buschmais.jqassistant"/>
         <property name="artifactId" value="jqa-uber-parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParentVersion"
           id="parent-updater-neo4jbackend">
         <property name="id" value="com.buschmais.jqassistant.neo4jserver:parent"/>
         <property name="groupId" value="com.buschmais.jqassistant.neo4jserver"/>
         <property name="artifactId" value="parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParentVersion"
           id="parent-updater-commandline">
         <property name="id" value="com.buschmais.jqassistant.cli:parent"/>
         <property name="groupId" value="com.buschmais.jqassistant.cli"/>
         <property name="artifactId" value="parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParentVersion"
           id="parent-updater-uber-parent">
         <property name="id" value="com.buschmais.jqassistant:jqa-uber-parent"/>
         <property name="groupId" value="com.buschmais.jqassistant"/>

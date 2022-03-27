@@ -1,7 +1,5 @@
 package com.buschmais.jqassistant.release.core.maven;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -66,7 +64,7 @@ public class VersionSetter {
                                   //System.out.println();
                                   //System.out.println(pomFile);
                                   //System.out.println(updater);
-                                  if (UpdateParent.class.isAssignableFrom(updater.getClass())) {
+                                  if (UpdateParentVersion.class.isAssignableFrom(updater.getClass())) {
                                       //UpdateParent u = ((UpdateParent) updater);
                                       //System.out.println("id: " + u.getId());
                                       //System.out.println("gi: " + u.getGroupId());

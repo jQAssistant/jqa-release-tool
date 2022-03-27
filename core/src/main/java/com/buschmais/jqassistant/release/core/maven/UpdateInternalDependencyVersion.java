@@ -1,6 +1,5 @@
 package com.buschmais.jqassistant.release.core.maven;
 
-
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
@@ -8,8 +7,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 
-
-public class UpdateCoreFrameworkVersion implements VersionUpdate {
+public class UpdateInternalDependencyVersion implements VersionUpdate {
 
     private String id;
     private String string;

@@ -7,8 +7,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 
-
-public class UpdateParent implements VersionUpdate {
+public class UpdateParentVersion implements VersionUpdate {
 
     private String id;
     private String nextVersion;
