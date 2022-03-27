@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import static org.springframework.boot.ansi.AnsiColor.*;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
 import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 

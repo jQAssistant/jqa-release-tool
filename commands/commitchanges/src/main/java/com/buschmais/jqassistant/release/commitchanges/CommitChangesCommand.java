@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 import static org.springframework.boot.ansi.AnsiColor.*;
 import static org.springframework.boot.ansi.AnsiStyle.BOLD;
-import static org.springframework.boot.ansi.AnsiStyle.NORMAL;
 
 @SpringBootApplication(scanBasePackages = "com.buschmais.jqassistant.release")
 public class CommitChangesCommand implements ApplicationRunner {

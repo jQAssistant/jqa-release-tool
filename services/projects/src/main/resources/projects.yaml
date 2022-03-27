@@ -3,71 +3,79 @@ order: 0
 id: 'com.buschmais.jqassistant:jqa-uber-parent'
 name: jQA Ueber Parent
 scmurl: git@github.com:{project}/jqa-uber-parent.git
+
+---
+order: 5
+id: 'com.buschmais.jqassistant:bom'
+name: jQA Bill of Materials
+scmurl: git@github.com:{project}/jqa-bom.git
+
 ---
 order: 10
 id: 'com.buschmais.jqassistant:own-constraints'
 name: jQA Own Rules
 scmurl: git@github.com:{project}/jqa-own-constraints.git
+
 ---
 order: 20
 id: 'com.buschmais.jqassistant:asciidoctor-utilities'
 name: jQA Asciidoctor Utilities
 scmurl: git@github.com:{project}/jqa-asciidoctor-utilities.git
-###
+
 ---
 order: 30
 id: 'com.buschmais.jqassistant:checkstyle-config'
 name: jQA Checkstyle Config
 scmurl: git@github.com:{project}/jqa-checkstyle-config.git
-###
+
 ---
 order: 40
 id: 'com.buschmais.jqassistant.neo4jserver:parent'
 name: jQA Neo4j Server
 scmurl: git@github.com:{project}/jqa-neo4j-backend.git
-###
+
 ---
 order: 50
 id: 'com.buschmais.jqassistant.core:parent'
 name: jQA Core Framework
 scmurl: git@github.com:{project}/jqa-core-framework.git
-###
+
 ---
 order: 60
 id: 'com.buschmais.jqassistant.plugin:jqassistant.plugin.parent'
 name: jQA Plugin Parent
 scmurl: git@github.com:{project}/jqa-plugin-parent.git
-###
+
 ---
 order: 70
 id: 'com.buschmais.jqassistant.plugin:common'
 name: jQA Plugin Common
 scmurl: git@github.com:{project}/jqa-plugin-common.git
-###
+
 ---
 order: 80
 id: 'com.buschmais.jqassistant.plugin:xml'
 name: jQA XML Plugin
 scmurl: git@github.com:{project}/jqa-xml-plugin.git
-###
+
 ---
 order: 90
 id: 'com.buschmais.jqassistant.plugin:java'
 name: jQA Java Plugin
 scmurl: git@github.com:{project}/jqa-java-plugin.git
-###
+
 ---
 order: 100
 id: 'com.buschmais.jqassistant.plugin:json'
 name: jQA JSON Plugin
 scmurl: git@github.com:{project}/jqa-json-plugin.git
-###
+
 ---
 order: 110
 id: 'com.buschmais.jqassistant.plugin:yaml'
 name: jQA YAML Plugin
 scmurl: git@github.com:{project}/jqa-yaml-plugin.git
-###
+
 ---
 order: 120
 id: 'com.buschmais.jqassistant.plugin:yaml2'

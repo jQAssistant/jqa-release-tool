@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ ! This bean configuration must contain for each jQAssistant module a single
+ ! configuration for a project version updater.
+ !-->
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
@@ -233,6 +239,13 @@
         <property name="id" value="com.buschmais.jqassistant.plugin:rdbms"/>
         <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
         <property name="artifactId" value="rdbms"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
+          id="pro-updater-bom">
+        <property name="id" value="com.buschmais.jqassistant:bom"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="bom"/>
     </bean>
 
 

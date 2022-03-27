@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ ! This bean configuration needs an entry for jQA module, if this module
+ ! is used as parent POM in another module. An example for such an module
+ ! is the Uber Parent or the Plugin Parent. But also the POM of
+ ! com.buschmais.jqassistant.neo4jserver:parent is such a POM, as it is
+ ! used as parent POM in its child modules.
+ !-->
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
