@@ -5,12 +5,6 @@ name: jQA Ueber Parent
 scmurl: git@github.com:{project}/jqa-uber-parent.git
 
 ---
-order: 5
-id: 'com.buschmais.jqassistant:bom'
-name: jQA Bill of Materials
-scmurl: git@github.com:{project}/jqa-bom.git
-
----
 order: 10
 id: 'com.buschmais.jqassistant:own-constraints'
 name: jQA Own Rules
@@ -27,6 +21,12 @@ order: 30
 id: 'com.buschmais.jqassistant:checkstyle-config'
 name: jQA Checkstyle Config
 scmurl: git@github.com:{project}/jqa-checkstyle-config.git
+
+---
+order: 35
+id: 'com.buschmais.jqassistant:bom'
+name: jQA Bill of Materials
+scmurl: git@github.com:{project}/jqa-bom.git
 
 ---
 order: 40
