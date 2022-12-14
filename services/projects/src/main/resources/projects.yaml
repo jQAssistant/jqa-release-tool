@@ -72,132 +72,42 @@ scmurl: git@github.com:{project}/jqa-json-plugin.git
 
 ---
 order: 110
-id: 'com.buschmais.jqassistant.plugin:yaml'
-name: jQA YAML Plugin
-scmurl: git@github.com:{project}/jqa-yaml-plugin.git
-
----
-order: 120
 id: 'com.buschmais.jqassistant.plugin:yaml2'
 name: jQA YAML 2 Plugin
 scmurl: git@github.com:{project}/jqa-yaml2-plugin.git
-
+###
 ---
-order: 130
+order: 120
 id: 'com.buschmais.jqassistant.plugin:junit'
 name: jQA JUnit Plugin
 scmurl: git@github.com:{project}/jqa-junit-plugin.git
 ###
 ---
-order: 140
-id: 'com.buschmais.jqassistant.plugin:rdbms'
-name: jQA RDBMS Plugin
-scmurl: git@github.com:{project}/jqa-rdbms-plugin.git
-###
----
-order: 150
+order: 130
 id: 'com.buschmais.jqassistant.plugin:maven3'
 name: jQA Maven 3 Plugin
 scmurl: git@github.com:{project}/jqa-maven3-plugin.git
 ###
 ---
-order: 160
-id: 'com.buschmais.jqassistant.plugin:tycho'
-name: jQA Tycho Plugin
-scmurl: git@github.com:{project}/jqa-tycho-plugin.git
-###
----
-order: 170
-id: 'com.buschmais.jqassistant.plugin:jaxrs'
-name: jQA JAX RS Plugin
-scmurl: git@github.com:{project}/jqa-jaxrs-plugin.git
-###
----
-order: 180
-id: 'com.buschmais.jqassistant.plugin:cdi'
-name: jQA CDI Plugin
-scmurl: git@github.com:{project}/jqa-cdi-plugin.git
-###
----
-order: 190
-id: 'com.buschmais.jqassistant.plugin:testng'
-name: jQA TestNG Plugin
-scmurl: git@github.com:{project}/jqa-testng-plugin.git
-###
----
-order: 200
-id: 'com.buschmais.jqassistant.plugin:osgi'
-name: jQA OSGi Plugin
-scmurl: git@github.com:{project}/jqa-osgi-plugin.git
-###
----
-order: 210
-id: 'com.buschmais.jqassistant.plugin:ejb3'
-name: jQA EJB Plugin
-scmurl: git@github.com:{project}/jqa-ejb3-plugin.git
-###
----
-order: 220
-id: 'com.buschmais.jqassistant.plugin:m2repo'
-name: jQA M2Repo Plugin
-scmurl: git@github.com:{project}/jqa-m2repo-plugin.git
-###
----
-order: 230
-id: 'com.buschmais.jqassistant.plugin:graphml'
-name: jQA GraphML Plugin
-scmurl: git@github.com:{project}/jqa-graphml-plugin.git
-###
----
-order: 234
-id: 'com.buschmais.jqassistant.plugin:graphql'
-name: jQA GraphQL Plugin
-scmurl: git@github.com:{project}/jqa-graphql-plugin.git
-
----
-order: 240
-id: 'com.buschmais.jqassistant.plugin:jpa'
-name: jQA JPA 2 Plugin
-scmurl: git@github.com:{project}/jqa-jpa2-plugin.git
-###
----
-order: 245
-id: 'com.buschmais.jqassistant.plugin:jqa-asciidoc-report-plugin'
-name: jQA Asciidoctor Report Plugin
-scmurl: git@github.com:{project}/jqa-asciidoc-report-plugin.git
-###
----
-order: 250
-id: 'com.buschmais.jqassistant.plugin:spring'
-name: jQA Spring Plugin
-scmurl: git@github.com:{project}/jqa-spring-plugin.git
-###
----
-order: 260
-id: 'com.buschmais.jqassistant.plugin:javaee6'
-name: jQA Java EE 6 Plugin
-scmurl: git@github.com:{project}/jqa-javaee6-plugin.git
-###
----
-order: 270
+order: 140
 id: 'com.buschmais.jqassistant:jqa-distribution-specification'
 name: jQA Distribution Spezification
 scmurl: git@github.com:{project}/jqa-distribution-specification.git
 ###
 ---
-order: 280
+order: 150
 id: 'com.buschmais.jqassistant:jqassistant-maven-plugin'
 name: jQA Maven Plugin
 scmurl: git@github.com:{project}/jqa-maven-plugin.git
 ###
 ---
-order: 285
+order: 160
 id: 'com.buschmais.jqassistant.cli:parent'
 name: jQA Commandline Tool
 scmurl: git@github.com:{project}/jqa-commandline-tool.git
 ###
 ---
-order: 290
+order: 170
 id: 'com.buschmais.jqassistant:manual'
 name: jQA Manual
 scmurl: git@github.com:{project}/jqa-manual.git

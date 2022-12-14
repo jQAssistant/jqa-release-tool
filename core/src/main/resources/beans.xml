@@ -16,34 +16,10 @@
         <property name="id" value="com.buschmais.jqassistant.core:parent"/>
     </bean>
 
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-ejb3-plugin">
-        <property name="propertyName" value="jqa-ejb3-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:ejb3"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-distribution-spec">
         <property name="propertyName" value="jqa-distribution-spec.version"/>
         <property name="id" value="com.buschmais.jqassistant:jqa-distribution-specification"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-graphml-plugin">
-        <property name="propertyName" value="jqa-graphml-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:graphml"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-graphql-plugin">
-        <property name="propertyName" value="jqa-graphql-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:graphql"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-asciidoctor-report-plugin">
-        <property name="propertyName" value="jqa-asciidoc-report-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:asciidoc-report"/>
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
@@ -96,12 +72,6 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-cdi-plugin">
-        <property name="propertyName" value="jqa-cdi-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:cdi"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
           id="jqa-plugin-common">
         <property name="propertyName" value="jqa-plugin-common.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:common"/>
@@ -134,81 +104,15 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-m2repo-plugin">
-        <property name="propertyName" value="jqa-m2repo-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:m2repo"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
           id="jqa-maven3-plugin">
         <property name="propertyName" value="jqa-maven3-plugin.version"/>
         <property name="id" value="com.buschmais.jqassistant.plugin:maven3"/>
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-jpa2-plugin">
-        <property name="propertyName" value="jqa-jpa2-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:jpa2"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
           id="jqa-own-constraints">
         <property name="propertyName" value="jqa-own-constraints.version"/>
         <property name="id" value="com.buschmais.jqassistant:own-constraints"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-rdbms-plugin">
-        <property name="propertyName" value="jqa-rdbms-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:rdbms"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-jaxrs-plugin">
-        <property name="propertyName" value="jqa-jaxrs-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:jaxrs"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-javaee6-plugin">
-        <property name="propertyName" value="jqa-javaee6-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:javaee6"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-osgi-plugin">
-        <property name="propertyName" value="jqa-osgi-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:osgi"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-spring-plugin">
-        <property name="propertyName" value="jqa-spring-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:spring"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-testng-plugin">
-        <property name="propertyName" value="jqa-testng-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:testng"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-tycho-plugin">
-        <property name="propertyName" value="jqa-tycho-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:tycho"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-yaml-plugin">
-        <property name="propertyName" value="jqa-yaml-plugin.version"/>
-        <property name="id" value="com.buschmais.jqassistant.plugin:yaml"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateInternalDependencyVersion"
-          id="jqa-bom">
-        <property name="propertyName" value="jqa-bom.version"/>
-        <property name="id" value="com.buschmais.jqassistant:bom"/>
     </bean>
 
 </beans>
