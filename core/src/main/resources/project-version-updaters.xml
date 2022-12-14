@@ -129,4 +129,11 @@
         <property name="artifactId" value="yaml2"/>
     </bean>
 
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
+          id="pro-updater-bom">
+        <property name="id" value="com.buschmais.jqassistant:bom"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="bom"/>
+    </bean>
+
 </beans>
