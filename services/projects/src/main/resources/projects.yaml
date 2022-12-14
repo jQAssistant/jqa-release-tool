@@ -28,7 +28,7 @@ scmurl: git@github.com:{project}/jqa-bom.git
 
 ---
 order: 40
-id: 'com.buschmais.jqassistant.neo4jserver:parent'
+id: 'com.buschmais.jqassistant.neo4j:embedded'
 name: jQA Neo4j Server
 scmurl: git@github.com:{project}/jqa-neo4j-backend.git
 ###

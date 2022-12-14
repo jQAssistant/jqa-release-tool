@@ -68,9 +68,9 @@
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
           id="pro-updater-neo4jserver">
-        <property name="id" value="com.buschmais.jqassistant.neo4jserver:parent"/>
-        <property name="groupId" value="com.buschmais.jqassistant.neo4jserver"/>
-        <property name="artifactId" value="parent"/>
+        <property name="id" value="com.buschmais.jqassistant.neo4j:embedded"/>
+        <property name="groupId" value="com.buschmais.jqassistant.neo4j"/>
+        <property name="artifactId" value="embedded"/>
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"

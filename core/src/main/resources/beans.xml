@@ -43,7 +43,7 @@
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
           id="jqa-neo4j-backend">
         <property name="propertyName" value="jqa-neo4jbackend.version"/>
-        <property name="id" value="com.buschmais.jqassistant.neo4jserver:parent"/>
+        <property name="id" value="com.buschmais.jqassistant.neo4j:embedded"/>
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"

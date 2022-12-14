@@ -32,13 +32,6 @@
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
-          id="parent-updater-neo4jbackend">
-        <property name="id" value="com.buschmais.jqassistant.neo4jserver:parent"/>
-        <property name="groupId" value="com.buschmais.jqassistant.neo4jserver"/>
-        <property name="artifactId" value="parent"/>
-    </bean>
-
-    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateParent"
           id="parent-updater-commandline">
         <property name="id" value="com.buschmais.jqassistant.cli:parent"/>
         <property name="groupId" value="com.buschmais.jqassistant.cli"/>
