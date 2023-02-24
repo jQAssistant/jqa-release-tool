@@ -115,4 +115,9 @@
         <property name="id" value="com.buschmais.jqassistant:own-constraints"/>
     </bean>
 
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateCoreFrameworkVersion"
+          id="jqa-bom">
+        <property name="propertyName" value="jqa-bom.version"/>
+        <property name="id" value="com.buschmais.jqassistant:bom"/>
+    </bean>
 </beans>
