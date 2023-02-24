@@ -68,9 +68,9 @@
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
           id="pro-updater-neo4jserver">
-        <property name="id" value="com.buschmais.jqassistant.neo4jserver:parent"/>
-        <property name="groupId" value="com.buschmais.jqassistant.neo4jserver"/>
-        <property name="artifactId" value="parent"/>
+        <property name="id" value="com.buschmais.jqassistant.neo4j:embedded"/>
+        <property name="groupId" value="com.buschmais.jqassistant.neo4j"/>
+        <property name="artifactId" value="embedded"/>
     </bean>
 
     <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
@@ -127,6 +127,13 @@
         <property name="id" value="com.buschmais.jqassistant.plugin:yaml2"/>
         <property name="groupId" value="com.buschmais.jqassistant.plugin"/>
         <property name="artifactId" value="yaml2"/>
+    </bean>
+
+    <bean class="com.buschmais.jqassistant.release.core.maven.UpdateProjectVersion"
+          id="pro-updater-bom">
+        <property name="id" value="com.buschmais.jqassistant:bom"/>
+        <property name="groupId" value="com.buschmais.jqassistant"/>
+        <property name="artifactId" value="bom"/>
     </bean>
 
 </beans>

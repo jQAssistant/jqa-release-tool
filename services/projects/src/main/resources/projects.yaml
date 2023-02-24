@@ -19,10 +19,16 @@ order: 30
 id: 'com.buschmais.jqassistant:checkstyle-config'
 name: jQA Checkstyle Config
 scmurl: git@github.com:{project}/jqa-checkstyle-config.git
-###
+
+---
+order: 35
+id: 'com.buschmais.jqassistant:bom'
+name: jQA Bill of Materials
+scmurl: git@github.com:{project}/jqa-bom.git
+
 ---
 order: 40
-id: 'com.buschmais.jqassistant.neo4jserver:parent'
+id: 'com.buschmais.jqassistant.neo4j:embedded'
 name: jQA Neo4j Server
 scmurl: git@github.com:{project}/jqa-neo4j-backend.git
 ###
