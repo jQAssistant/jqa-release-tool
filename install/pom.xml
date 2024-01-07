@@ -12,6 +12,9 @@
 
     <artifactId>install</artifactId>
     <name>Installation Step</name>
+    <properties>
+        <jqa-release-tool.install.dir>${user.home}/jqa-release-environment</jqa-release-tool.install.dir>
+    </properties>
 
     <build>
         <plugins>
@@ -24,7 +27,7 @@
                         </goals>
                         <phase>install</phase>
                         <configuration>
-                            <outputDirectory>${user.home}/jqa-release-environment</outputDirectory>
+                            <outputDirectory>${jqa-release-tool.install.dir}</outputDirectory>
                             <stripVersion>true</stripVersion>
                             <overWriteIfNewer>true</overWriteIfNewer>
                             <overWriteSnapshots>true</overWriteSnapshots>

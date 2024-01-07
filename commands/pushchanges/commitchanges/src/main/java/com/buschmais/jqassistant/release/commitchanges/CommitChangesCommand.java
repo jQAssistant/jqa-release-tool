@@ -50,7 +50,7 @@ public class CommitChangesCommand implements CommandLineRunner {
 
             git.add().setUpdate(true).addFilepattern(".").call();
             Git.open(new File(projectRepository.getHumanName()))
-               .commit().setCommitter("Oliver B. Fischer", "o.b.fischer@swe-blog.net")
+               .commit().setCommitter("Dirk Mahler", "dirk.mahler@buschmais.com")
                .setMessage("DAS IST EIN TEST")
                .call();
         }

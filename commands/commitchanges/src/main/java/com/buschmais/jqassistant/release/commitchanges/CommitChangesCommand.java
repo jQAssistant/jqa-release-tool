@@ -54,7 +54,7 @@ public class CommitChangesCommand implements ApplicationRunner {
         try {
             for (var projectRepository : getRepositorySrv().getProjectRepositories()) {
                 String s = AnsiOutput.toString(AnsiColor.BRIGHT_YELLOW,
-                                               "Commiting changes in ",
+                                               "Committing changes in ",
                                                BOLD, AnsiColor.BRIGHT_YELLOW, "'",
                                                projectRepository.getHumanName(),
                                                "'", AnsiColor.DEFAULT);
@@ -63,7 +63,7 @@ public class CommitChangesCommand implements ApplicationRunner {
                 Git.open(new File(projectRepository.getHumanName()))
                    .add().setUpdate(true).addFilepattern(".").call();
                 Git.open(new File(projectRepository.getHumanName()))
-                   .commit().setCommitter("Oliver B. Fischer", "o.b.fischer@swe-blog.net")
+                   .commit().setCommitter("Dirk Mahler", "dirk.mahler@buschmais.com")
                    .setMessage(message)
                    .call();
             }
